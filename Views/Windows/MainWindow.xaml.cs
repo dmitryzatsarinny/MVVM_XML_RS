@@ -15,9 +15,6 @@ using System.Windows.Shapes;
 
 namespace MVVM_XML_RS
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
         public MainWindow()
