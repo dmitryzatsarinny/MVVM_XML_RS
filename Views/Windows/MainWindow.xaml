@@ -6,33 +6,63 @@
         xmlns:vm="clr-namespace:MVVM_XML_RS.ViewModels"
         xmlns:l="clr-namespace:MVVM_XML_RS" 
         
-        Title="{Binding Title}"
-        
-        Height="450" 
+        WindowStyle="None"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize"
+        Height="600" 
         Width="800">
 
     <Window.DataContext>
         <vm:MainWindowViewModel/>
     </Window.DataContext>
 
-    <DockPanel>
-        <Menu DockPanel.Dock="Top">
+    <Border Background="GhostWhite" BorderBrush="Black" BorderThickness="1">
+
+        <DockPanel>
+
+            <DockPanel DockPanel.Dock="Top" Height="30" Background="#FFA6CDF0">
+                <TextBlock Margin="10,0,0,0"  Text="{Binding Title}" FontSize="18" VerticalAlignment="Center"/>
+                <Button Margin="0,0,1,0" FontSize="20" Content="x" Height="28" Width="28" VerticalAlignment="Center" HorizontalContentAlignment="Center" HorizontalAlignment="Right" FontWeight="Bold" Background="#FFEC5454" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Padding="0,-7,0,0" UseLayoutRounding="False"/>
+            </DockPanel>
             
+            <Menu DockPanel.Dock="Top" Height="25" Background="GhostWhite">
+
             <Menu.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <DockPanel HorizontalAlignment="Stretch"></DockPanel>
+                    <DockPanel HorizontalAlignment="Stretch">
+                    </DockPanel>
                 </ItemsPanelTemplate>
             </Menu.ItemsPanel>
-            
-            <MenuItem Header="Файл"></MenuItem>
-            <MenuItem Header="Помощь"></MenuItem>
-            <MenuItem Header="Сохранить" HorizontalAlignment="Right"></MenuItem>
-        </Menu>
-        <StatusBar DockPanel.Dock="Bottom"></StatusBar>
-        <TabControl>
-            <TabItem></TabItem>
-            <TabItem></TabItem>
-        </TabControl>
-    </DockPanel>
 
+                <MenuItem Header="Файл" FontSize="16"></MenuItem>
+                <MenuItem Header="Помощь" FontSize="16"></MenuItem>
+                <MenuItem Header="Сохранить" FontSize="16" HorizontalAlignment="Right"></MenuItem>
+
+        </Menu>
+
+            <StatusBar DockPanel.Dock="Bottom" Height="25">
+                <StatusBarItem  HorizontalAlignment="Right">
+                    <TextBlock Text="{Binding Status}" Margin="15,-2,0,0" FontSize="16"/>
+                </StatusBarItem>
+                <StatusBarItem>
+                    <ProgressBar Width="120" Margin="25,0,0,0" Height="14" Value="30"/>
+                </StatusBarItem>
+                <StatusBarItem  HorizontalAlignment="Right">
+                    <TextBlock Text="{Binding Version}" Margin="0,-2,15,0" FontSize="16"/>
+                </StatusBarItem>
+            </StatusBar>
+            
+            <TabControl>
+                <TabItem Header="Устройства" Height="25" FontSize="16" Background="#FF55C713">
+                        <DockPanel>
+                        </DockPanel>
+                </TabItem>
+                <TabItem Header="Конфигурация" Height="25" FontSize="16" Background="#FF55C713">
+                    <DockPanel>
+                    </DockPanel>
+                </TabItem>
+            </TabControl>
+
+        </DockPanel>
+    </Border>
 </Window>
