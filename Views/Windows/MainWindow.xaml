@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:vm="clr-namespace:MVVM_XML_RS.ViewModels"
+        xmlns:cmd="clr-namespace:MVVM_XML_RS.Infrastructure.Commands"
         xmlns:l="clr-namespace:MVVM_XML_RS" 
         
         WindowStyle="None"
@@ -11,18 +12,29 @@
         ResizeMode="NoResize"
         Height="600" 
         Width="800">
-
+    
+   
+    
     <Window.DataContext>
         <vm:MainWindowViewModel/>
     </Window.DataContext>
+
+    <Window.Resources>
+        <cmd:CloseApplicationCommand x:Key="CloseApplicationCommand"/>
+    </Window.Resources>
+
+    <Window.InputBindings>
+        <KeyBinding Modifiers="Control" Key="Q" Command="{StaticResource CloseApplicationCommand}"/>
+    </Window.InputBindings>
 
     <Border Background="GhostWhite" BorderBrush="Black" BorderThickness="1">
 
         <DockPanel>
 
             <DockPanel DockPanel.Dock="Top" Height="30" Background="#FFA6CDF0">
+       
                 <TextBlock Margin="10,0,0,0"  Text="{Binding Title}" FontSize="18" VerticalAlignment="Center"/>
-                <Button Margin="0,0,1,0" FontSize="20" Content="x" Height="28" Width="28" VerticalAlignment="Center" HorizontalContentAlignment="Center" HorizontalAlignment="Right" FontWeight="Bold" Background="#FFEC5454" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Padding="0,-7,0,0" UseLayoutRounding="False"/>
+                <Button Command="{StaticResource CloseApplicationCommand}"  Margin="0,0,1,0" FontSize="20" Content="x" Height="28" Width="28" VerticalAlignment="Center" HorizontalContentAlignment="Center" HorizontalAlignment="Right" FontWeight="Bold" Background="#FFEC5454" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Padding="0,-7,0,0" UseLayoutRounding="False"/>
             </DockPanel>
             
             <Menu DockPanel.Dock="Top" Height="25" Background="GhostWhite">
@@ -40,6 +52,7 @@
 
         </Menu>
 
+            
             <StatusBar DockPanel.Dock="Bottom" Height="25">
                 <StatusBarItem  HorizontalAlignment="Right">
                     <TextBlock Text="{Binding Status}" Margin="15,-2,0,0" FontSize="16"/>
@@ -62,6 +75,7 @@
                     </DockPanel>
                 </TabItem>
             </TabControl>
+            
 
         </DockPanel>
     </Border>

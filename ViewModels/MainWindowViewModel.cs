@@ -1,7 +1,10 @@
-﻿using MVVM_XML_RS.ViewModels.Base;
+﻿using MVVM_XML_RS.Infrastructure.Commands;
+using MVVM_XML_RS.ViewModels.Base;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Windows;
+using System.Windows.Input;
 
 namespace MVVM_XML_RS.ViewModels
 {
@@ -32,5 +35,36 @@ namespace MVVM_XML_RS.ViewModels
             set => Set(ref _Status, value);
         }
         #endregion
+
+        #region Команды
+
+        #region CloseApplicationCommand
+        public ICommand CloseApplicationCommand { get;  }
+        private bool CanCloseApplicationCommandExecuted(object p) => true;
+        private void OnCloseApplicationCommandExecuted(object p)
+        {
+            Application.Current.Shutdown();
+        }
+        #endregion
+
+        #region MoveHeadApplicationCommand
+        public MouseButtonEventHandler MoveHeadApplicationCommand { get; }
+        private bool CanMoveHeadApplicationCommandExecuted(object p) => true;
+        private void OnMoveHeadApplicationCommandExecuted(object p)
+        {
+            Application.Current.Shutdown();
+        }
+        #endregion
+        #endregion
+
+        public MainWindowViewModel()
+        {
+            #region Команды
+
+            CloseApplicationCommand = new LambdaCommand(OnCloseApplicationCommandExecuted, CanCloseApplicationCommandExecuted);
+           // MoveHeadApplicationCommand = new LambdaCommand(OnMoveHeadApplicationCommandExecuted, CanMoveHeadApplicationCommandExecuted);
+
+            #endregion
+        }
     }
 }
