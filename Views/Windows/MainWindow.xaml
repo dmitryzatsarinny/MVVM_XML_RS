@@ -6,6 +6,7 @@
         xmlns:vm="clr-namespace:MVVM_XML_RS.ViewModels"
         xmlns:cmd="clr-namespace:MVVM_XML_RS.Infrastructure.Commands"
         xmlns:l="clr-namespace:MVVM_XML_RS" 
+        xmlns:fa="http://schemas.fontawesome.com/icons/"
         
         WindowStyle="None"
         WindowStartupLocation="CenterScreen"
@@ -32,7 +33,7 @@
         <DockPanel>
 
             <DockPanel DockPanel.Dock="Top" Height="30" Background="#FFA6CDF0">
-       
+                <!--<Image Source=""/>-->
                 <TextBlock Margin="10,0,0,0"  Text="{Binding Title}" FontSize="18" VerticalAlignment="Center"/>
                 <Button Command="{StaticResource CloseApplicationCommand}"  Margin="0,0,1,0" FontSize="20" Content="x" Height="28" Width="28" VerticalAlignment="Center" HorizontalContentAlignment="Center" HorizontalAlignment="Right" FontWeight="Bold" Background="#FFEC5454" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Padding="0,-7,0,0" UseLayoutRounding="False"/>
             </DockPanel>
@@ -46,22 +47,51 @@
                 </ItemsPanelTemplate>
             </Menu.ItemsPanel>
 
-                <MenuItem Header="Файл" FontSize="16"></MenuItem>
-                <MenuItem Header="Помощь" FontSize="16"></MenuItem>
-                <MenuItem Header="Сохранить" FontSize="16" HorizontalAlignment="Right"></MenuItem>
+                <MenuItem FontSize="16" Command ="{Binding OpenfileCommand}">
+                    <MenuItem.Header>
+                        <StackPanel Orientation="Horizontal">
+                            <fa:FontAwesome Icon="Regular_File" Height="17"/>
+                            <TextBlock Text=" Файл"/>
+                        </StackPanel>
+                    </MenuItem.Header>
+                </MenuItem>
 
+                <MenuItem FontSize="16">
+                    <MenuItem.Header>
+                        <StackPanel Orientation="Horizontal">
+                            <fa:FontAwesome Icon="Solid_Book" Height="17"/>
+                            <TextBlock Text=" Помощь"/>
+                        </StackPanel>
+                    </MenuItem.Header>
+                </MenuItem>
+
+                <MenuItem FontSize="16" HorizontalAlignment="Right">
+                    <MenuItem.Header>
+                        <StackPanel Orientation="Horizontal">
+                            <fa:FontAwesome Icon="Solid_download" Height="17"/>
+                        <TextBlock Text=" Сохранить"/>
+                    </StackPanel>
+                    </MenuItem.Header>
+                </MenuItem>
         </Menu>
 
             
             <StatusBar DockPanel.Dock="Bottom" Height="25">
                 <StatusBarItem  HorizontalAlignment="Right">
-                    <TextBlock Text="{Binding Status}" Margin="15,-2,0,0" FontSize="16"/>
+                    
+                        <StackPanel Orientation="Horizontal">
+                        <fa:FontAwesome Icon="Solid_Tasks" Height="16" Margin="15,3,10,0"/>
+                        <TextBlock Text="{Binding Status}" Margin="0,-2,0,0" FontSize="16"/>
+                    </StackPanel>
                 </StatusBarItem>
                 <StatusBarItem>
                     <ProgressBar Width="120" Margin="25,0,0,0" Height="14" Value="30"/>
                 </StatusBarItem>
                 <StatusBarItem  HorizontalAlignment="Right">
-                    <TextBlock Text="{Binding Version}" Margin="0,-2,15,0" FontSize="16"/>
+                    <StackPanel Orientation="Horizontal">
+                        <fa:FontAwesome Icon="Solid_CodeBranch" Height="16"  Margin="0,3,10,0"/>
+                        <TextBlock Text="{Binding Version}" Margin="0,-2,15,0" FontSize="16"/>
+                    </StackPanel>
                 </StatusBarItem>
             </StatusBar>
             

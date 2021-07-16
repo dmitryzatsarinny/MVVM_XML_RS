@@ -1,5 +1,6 @@
 ﻿using MVVM_XML_RS.Infrastructure.Commands;
 using MVVM_XML_RS.ViewModels.Base;
+using MVVM_XML_RS.Services;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -20,7 +21,7 @@ namespace MVVM_XML_RS.ViewModels
         }
         #endregion
         #region Версия приложения
-        private string _Version = "Version " + "1.0";
+        private string _Version = "Version " + "1.1";
         public string Version
         {
             get => _Version;
@@ -55,6 +56,29 @@ namespace MVVM_XML_RS.ViewModels
             Application.Current.Shutdown();
         }
         #endregion
+
+        #region Openfile
+        
+        public ICommand OpenfileCommand { get; }
+        private bool CanOpenfileCommandExecuted(object p) => true;
+        private void OnOpenfileCommandExecuted(object p)
+        {
+            
+            string str = PathFinder.PathFinder_Ex();
+            bool canread = true;
+            try
+            {
+                str = System.IO.File.ReadAllText(str);
+            }
+            catch
+            {
+                canread = false;
+            }
+
+            Application.Current.Shutdown();
+        }
+        #endregion
+
         #endregion
 
         public MainWindowViewModel()
@@ -62,7 +86,8 @@ namespace MVVM_XML_RS.ViewModels
             #region Команды
 
             CloseApplicationCommand = new LambdaCommand(OnCloseApplicationCommandExecuted, CanCloseApplicationCommandExecuted);
-           // MoveHeadApplicationCommand = new LambdaCommand(OnMoveHeadApplicationCommandExecuted, CanMoveHeadApplicationCommandExecuted);
+            OpenfileCommand = new LambdaCommand(OnOpenfileCommandExecuted, CanOpenfileCommandExecuted);
+            // MoveHeadApplicationCommand = new LambdaCommand(OnMoveHeadApplicationCommandExecuted, CanMoveHeadApplicationCommandExecuted);
 
             #endregion
         }
