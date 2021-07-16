@@ -8,22 +8,23 @@ namespace MVVM_XML_RS.Models
 {
 	internal class Doc
     {
+		//public string info { get; set; }
 		public string RSSETUP { get; set; }
-		public ICollection<Device> Devices { get; set }
+		public List<Device> Devices { get; set; }
 
 	}
 
 	internal class Device
 	{
 		public string Name { get; set; }
-		public bool StressDeviceType { get; set; }
+		public int StressDeviceType { get; set; }
 		public int Number { get; set; }
 		public Deviceinfo Info { get; set; }
 	}
 
     internal struct Deviceinfo
     {
-        public bool StressDeviceType { get; set; }
+        public int StressDeviceType { get; set; }
         public int StressDeviceVeloType { get; set; }
         public int StressDeviceTrmType { get; set; }
         public int StressDevicePort { get; set; }
@@ -51,6 +52,6 @@ namespace MVVM_XML_RS.Models
 		public int VeloStopPower { get; set; }
 		public int TrmStopPowerS { get; set; }
 		public int TrmStopPowerV { get; set; }
-		public int UserProtName { get; set; }
+		public string UserProtName { get; set; }
 	}
 }

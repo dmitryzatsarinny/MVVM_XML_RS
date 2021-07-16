@@ -8,11 +8,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Data\" />
+    <PackageReference Include="FontAwesome5" Version="2.1.4" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="FontAwesome5" Version="2.1.4" />
+    <Folder Include="Data\" />
   </ItemGroup>
 
 </Project>

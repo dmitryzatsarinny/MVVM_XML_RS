@@ -6,11 +6,24 @@ using System.Collections.Generic;
 using System.Text;
 using System.Windows;
 using System.Windows.Input;
+using System.Collections.ObjectModel;
+using MVVM_XML_RS.Models;
 
 namespace MVVM_XML_RS.ViewModels
 {
     internal class MainWindowViewModel: ViewModel
     {
+
+        #region database
+        private Doc _doc;
+        public Doc doc
+        {
+            get => _doc;
+            set => Set(ref _doc, value);
+        }
+
+        #endregion
+
         #region Заголовок окна
         private string _Title = "Reabilitation Param Changer";
         /// <summary>Заголовок окна</summary>
@@ -63,24 +76,14 @@ namespace MVVM_XML_RS.ViewModels
         private bool CanOpenfileCommandExecuted(object p) => true;
         private void OnOpenfileCommandExecuted(object p)
         {
-            
             string str = PathFinder.PathFinder_Ex();
-            bool canread = true;
-            try
-            {
-                str = System.IO.File.ReadAllText(str);
-            }
-            catch
-            {
-                canread = false;
-            }
-
-            Application.Current.Shutdown();
+            doc = XML_reader.find_xml_device(str);
         }
         #endregion
 
         #endregion
 
+        //конструктор
         public MainWindowViewModel()
         {
             #region Команды
@@ -88,7 +91,6 @@ namespace MVVM_XML_RS.ViewModels
             CloseApplicationCommand = new LambdaCommand(OnCloseApplicationCommandExecuted, CanCloseApplicationCommandExecuted);
             OpenfileCommand = new LambdaCommand(OnOpenfileCommandExecuted, CanOpenfileCommandExecuted);
             // MoveHeadApplicationCommand = new LambdaCommand(OnMoveHeadApplicationCommandExecuted, CanMoveHeadApplicationCommandExecuted);
-
             #endregion
         }
     }
