@@ -13,6 +13,7 @@ namespace MVVM_XML_RS.Services
     {
         public static Doc find_xml_device(string str)
         {
+
             Doc doc = new Doc();
             List<Device> Devicelist = new List<Device>();
             //XmlReaderSettings settings = new XmlReaderSettings();
@@ -32,7 +33,8 @@ namespace MVVM_XML_RS.Services
 
                         if (xnode.Name.Contains("DEVICE")) {
                             Device device = new Device();
-                            Deviceinfo deviceinfo = new Deviceinfo();
+                            List<string> settvalue = new List<string>();
+                            List<string> settname = new List<string>();
                             device.Name = xnode.Name;
                             device.Number = i;
                             i++;
@@ -43,95 +45,102 @@ namespace MVVM_XML_RS.Services
                                 {
                                     case "StressDeviceType":
                                         device.StressDeviceType = Int32.Parse(childnode.InnerText);
-                                        deviceinfo.StressDeviceType = Int32.Parse(childnode.InnerText);
+                                        settname.Add("StressDeviceType");
+                                        settvalue.Add(childnode.InnerText);
                                         break;
                                     case "StressDeviceVeloType":
-                                        deviceinfo.StressDeviceVeloType = Int32.Parse(childnode.InnerText);
+                                        settname.Add("StressDeviceVeloType");
+                                        settvalue.Add(childnode.InnerText);
                                         break;
                                     case "StressDeviceTrmType":
-                                        deviceinfo.StressDeviceTrmType = Int32.Parse(childnode.InnerText);
+                                        settname.Add("StressDeviceTrmType");
+                                        settvalue.Add(childnode.InnerText);
                                         break;
                                     case "StressDevicePort":
-                                        deviceinfo.StressDevicePort = Int32.Parse(childnode.InnerText);
+                                        settname.Add("StressDevicePort");
+                                        settvalue.Add(childnode.InnerText);
                                         break;
                                     case "ECG_Port":
-                                        deviceinfo.ECG_Port = Int32.Parse(childnode.InnerText);
+                                        settname.Add("ECG_Port");
+                                        settvalue.Add(childnode.InnerText);
                                         break;
                                     case "ECG_WIRELESS_Port":
-                                        deviceinfo.ECG_WIRELESS_Port = Int32.Parse(childnode.InnerText);
-                                        break;
+                                        settname.Add("ECG_WIRELESS_Port");
+                                        settvalue.Add(childnode.InnerText); break;
                                     case "StressTestProgramm":
-                                        deviceinfo.StressTestProgramm = Int32.Parse(childnode.InnerText);
-                                        break;
+                                        settname.Add("StressTestProgramm");
+                                        settvalue.Add(childnode.InnerText); break;
                                     case "BTDeviceName":
-                                        deviceinfo.BTDeviceName = childnode.InnerText;
-                                        break;
+                                        settname.Add("BTDeviceName");
+                                        settvalue.Add(childnode.InnerText); break;
                                     case "Wireless":
-                                        deviceinfo.Wireless = Int32.Parse(childnode.InnerText);
-                                        break;
+                                        settname.Add("Wireless");
+                                        settvalue.Add(childnode.InnerText); break;
                                     case "VeloStartPower":
-                                        deviceinfo.VeloStartPower = Int32.Parse(childnode.InnerText);
-                                        break;
+                                        settname.Add("VeloStartPower");
+                                        settvalue.Add(childnode.InnerText); break;
                                     case "TrmStartPowerS":
-                                        deviceinfo.TrmStartPowerS = Int32.Parse(childnode.InnerText);
-                                        break;
+                                        settname.Add("TrmStartPowerS");
+                                        settvalue.Add(childnode.InnerText); break;
                                     case "TrmStartPowerV":
-                                        deviceinfo.TrmStartPowerV = Int32.Parse(childnode.InnerText);
-                                        break;
+                                        settname.Add("TrmStartPowerV");
+                                        settvalue.Add(childnode.InnerText); break;
                                     case "IncPower":
-                                        deviceinfo.IncPower = Int32.Parse(childnode.InnerText);
-                                        break;
+                                        settname.Add("IncPower");
+                                        settvalue.Add(childnode.InnerText); break;
                                     case "VeloMaxPower":
-                                        deviceinfo.VeloMaxPower = Int32.Parse(childnode.InnerText);
-                                        break;
+                                        settname.Add("VeloMaxPower");
+                                        settvalue.Add(childnode.InnerText); break;
                                     case "TrmMaxPowerS":
-                                        deviceinfo.TrmMaxPowerS = Int32.Parse(childnode.InnerText);
-                                        break;
+                                        settname.Add("TrmMaxPowerS");
+                                        settvalue.Add(childnode.InnerText); break;
                                     case "TrmMaxPowerV":
-                                        deviceinfo.TrmMaxPowerV = Int32.Parse(childnode.InnerText);
-                                        break;
+                                        settname.Add("TrmMaxPowerV");
+                                        settvalue.Add(childnode.InnerText); break;
                                     case "TotalTrainingLenth":
-                                        deviceinfo.TotalTrainingLenth = Int32.Parse(childnode.InnerText);
-                                        break;
+                                        settname.Add("TotalTrainingLenth");
+                                        settvalue.Add(childnode.InnerText); break;
                                     case "MinPowerTrainingLenth":
-                                        deviceinfo.MinPowerTrainingLenth = Int32.Parse(childnode.InnerText);
-                                        break;
+                                        settname.Add("MinPowerTrainingLenth");
+                                        settvalue.Add(childnode.InnerText); break;
                                     case "MaxPowerTrainingLenth":
-                                        deviceinfo.MaxPowerTrainingLenth = Int32.Parse(childnode.InnerText);
-                                        break;
+                                        settname.Add("MaxPowerTrainingLenth");
+                                        settvalue.Add(childnode.InnerText); break;
                                     case "TrainingHR":
-                                        deviceinfo.TrainingHR = Int32.Parse(childnode.InnerText);
-                                        break;
+                                        settname.Add("TrainingHR");
+                                        settvalue.Add(childnode.InnerText); break;
                                     case "TrainingLDdec":
-                                        deviceinfo.TrainingLDdec = Int32.Parse(childnode.InnerText);
-                                        break;
+                                        settname.Add("TrainingLDdec");
+                                        settvalue.Add(childnode.InnerText); break;
                                     case "Trendchan":
-                                        deviceinfo.Trendchan = Int32.Parse(childnode.InnerText);
-                                        break;
+                                        settname.Add("Trendchan");
+                                        settvalue.Add(childnode.InnerText); break;
                                     case "P_RESETTIME":
-                                        deviceinfo.P_RESETTIME = Int32.Parse(childnode.InnerText);
-                                        break;
+                                        settname.Add("P_RESETTIME");
+                                        settvalue.Add(childnode.InnerText); break;
                                     case "IncTime":
-                                        deviceinfo.IncTime = Int32.Parse(childnode.InnerText);
-                                        break;
+                                        settname.Add("IncTime");
+                                        settvalue.Add(childnode.InnerText); break;
                                     case "IncTimeMode":
-                                        deviceinfo.IncTimeMode = Int32.Parse(childnode.InnerText);
-                                        break;
+                                        settname.Add("IncTimeMode");
+                                        settvalue.Add(childnode.InnerText); break;
                                     case "VeloStopPower":
-                                        deviceinfo.VeloStopPower = Int32.Parse(childnode.InnerText);
-                                        break;
+                                        settname.Add("VeloStopPower");
+                                        settvalue.Add(childnode.InnerText); break;
                                     case "TrmStopPowerS":
-                                        deviceinfo.TrmStopPowerS = Int32.Parse(childnode.InnerText);
-                                        break;
+                                        settname.Add("TrmStopPowerS");
+                                        settvalue.Add(childnode.InnerText); break;
                                     case "TrmStopPowerV":
-                                        deviceinfo.TrmStopPowerV = Int32.Parse(childnode.InnerText);
-                                        break;
+                                        settname.Add("TrmStopPowerV");
+                                        settvalue.Add(childnode.InnerText); break;
                                     case "UserProtName":
-                                        deviceinfo.UserProtName = childnode.InnerText;
-                                        break;
+                                        settname.Add("UserProtName");
+                                        settvalue.Add(childnode.InnerText); break;
                                 }
                             }
-                            device.Info = deviceinfo;
+
+                            device.DeviceName = settname;
+                            device.DeviceInfo = settvalue;
                             Devicelist.Add(device);
                         }
                 }

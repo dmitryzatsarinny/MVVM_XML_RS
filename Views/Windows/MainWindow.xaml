@@ -11,7 +11,7 @@
         WindowStyle="None"
         WindowStartupLocation="CenterScreen"
         ResizeMode="NoResize"
-        Height="600" 
+        Height="800" 
         Width="800">
     
    
@@ -22,7 +22,27 @@
 
     <Window.Resources>
         <cmd:CloseApplicationCommand x:Key="CloseApplicationCommand"/>
+
+        <DataTemplate x:Key="DefaultListBox">
+            <Grid x:Name="GridItem">
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="200" />
+                    <ColumnDefinition Width="400" />
+                    <ColumnDefinition Width="148" />
+                </Grid.ColumnDefinitions>
+
+                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="0" Text="{Binding Path=SettingInfo}"/>
+                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Text="{Binding Path=SettingValue}"/>
+                <Button Content="{Binding Path=SettingButton}" Grid.Column="2" Margin="2" Background="#0000" BorderBrush="#0000"/>
+
+                <Border BorderBrush="Green" BorderThickness="2" Grid.Column="0" CornerRadius="4"/>
+                <Border BorderBrush="Green" BorderThickness="2" Grid.Column="1" CornerRadius="4"/>
+                <Border BorderBrush="Red" BorderThickness="2" Grid.Column="2" CornerRadius="4"/>
+            </Grid>
+        </DataTemplate>
     </Window.Resources>
+    
 
     <Window.InputBindings>
         <KeyBinding Modifiers="Control" Key="Q" Command="{StaticResource CloseApplicationCommand}"/>
@@ -73,7 +93,9 @@
                     </StackPanel>
                     </MenuItem.Header>
                 </MenuItem>
-        </Menu>
+                <TextBox Text="{Binding Index}" TextWrapping="Wrap" Width="120"/>
+                <Button Width="60" Height="15" Command="{Binding ViewListboxCommand}"/>
+            </Menu>
 
             
             <StatusBar DockPanel.Dock="Bottom" Height="25">
@@ -85,7 +107,7 @@
                     </StackPanel>
                 </StatusBarItem>
                 <StatusBarItem>
-                    <ProgressBar Width="120" Margin="25,0,0,0" Height="14" Value="30"/>
+                    <ProgressBar Width="120" Margin="25,0,0,0" Height="14" Value="{Binding Progress}"/>
                 </StatusBarItem>
                 <StatusBarItem  HorizontalAlignment="Right">
                     <StackPanel Orientation="Horizontal">
@@ -94,17 +116,40 @@
                     </StackPanel>
                 </StatusBarItem>
             </StatusBar>
-            
-            <TabControl>
-                <TabItem Header="Устройства" Height="25" FontSize="16" Background="#FF55C713">
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <TabControl>
+                    <TabItem Header="Устройства" Height="25" FontSize="16" Background="#FF55C713">
                         <DockPanel>
                         </DockPanel>
-                </TabItem>
-                <TabItem Header="Конфигурация" Height="25" FontSize="16" Background="#FF55C713">
-                    <DockPanel>
-                    </DockPanel>
-                </TabItem>
-            </TabControl>
+                    </TabItem>
+                    <TabItem Header="Конфигурация" Height="25" FontSize="16" Background="#FF55C713">
+                        <GroupBox Header="Характеристики" FontSize="16">
+
+                            <ListBox Name="MyListBox" ItemTemplate="{StaticResource DefaultListBox}" ItemsSource="{Binding Mylistboxdata}">
+                                <ListBox.ItemContainerStyle>
+                                    <Style TargetType="{x:Type ListBoxItem}">
+                                        <Setter Property="Focusable" Value="False"/>
+                                    </Style>
+                                </ListBox.ItemContainerStyle>
+                            </ListBox>
+                        </GroupBox>
+                    </TabItem>
+                </TabControl>
+
+                <Grid Grid.Row="0" Height="{Binding ActualHeight, ElementName=tabItem}" VerticalAlignment="Top" Margin="0,2,0,0">
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <TextBlock VerticalAlignment="Center" Text="{Binding ViewDevice}" FontSize="16" Foreground="Black"/>
+                    </StackPanel>
+                </Grid>
+
+            </Grid>
+
+            
             
 
         </DockPanel>

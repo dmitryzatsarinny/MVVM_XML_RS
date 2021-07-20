@@ -8,12 +8,12 @@ using System.Windows;
 using System.Windows.Input;
 using System.Collections.ObjectModel;
 using MVVM_XML_RS.Models;
+using System.Linq;
 
 namespace MVVM_XML_RS.ViewModels
 {
     internal class MainWindowViewModel: ViewModel
     {
-
         #region database
         private Doc _doc;
         public Doc doc
@@ -21,7 +21,6 @@ namespace MVVM_XML_RS.ViewModels
             get => _doc;
             set => Set(ref _doc, value);
         }
-
         #endregion
 
         #region Заголовок окна
@@ -41,14 +40,26 @@ namespace MVVM_XML_RS.ViewModels
             set => Set(ref _Version, value);
         }
         #endregion
+
         #region Статус
-        private string _Status = "Ready";
+        public string _Status = "Ready";
         public string Status
         {
             get => _Status;
             set => Set(ref _Status, value);
         }
         #endregion
+
+        #region Прогресс
+        public int _Progress = 100;
+        public int Progress
+        {
+            get => _Progress;
+            set => Set(ref _Progress, value);
+        }
+        #endregion
+
+
 
         #region Команды
 
@@ -70,16 +81,71 @@ namespace MVVM_XML_RS.ViewModels
         }
         #endregion
 
+        #region ViewListbox
+        public ICommand ViewListboxCommand { get; }
+        private bool CanViewListboxCommandExecuted(object p) => true;
+        private void OnViewListboxCommandExecuted(object p)
+        {
+            _mylistboxdata.Clear();
+            if ((_doc != null) && (_index <= _doc.Devices.Count) && (_index >= 0))
+            {
+                _ViewDevice = "Выбрано устройство " + _doc.Devices[_index].Name;
+                for (int i = 0; i < 29; i++)
+                    _mylistboxdata.Add(new ViewList()
+                    {
+                        SettingInfo = _doc.Devices[_index].DeviceName[i],
+                        SettingValue = _doc.Devices[_index].DeviceInfo[i],
+                        SettingButton = "Изменить",
+                    });
+            }
+
+        }
+        #endregion
+
+        #region ViewIndex
+        private int _index = -1;
+        public int Index
+        {
+            get => _index;
+            set => Set(ref _index, value);
+        }
+        #endregion
+
+        #region ViewDevice
+        private string _ViewDevice = "No device";
+        public string ViewDevice
+        {
+            get => _ViewDevice;
+            set => Set(ref _ViewDevice, value);
+        }
+        #endregion
+
+        #region database
+        private ObservableCollection<ViewList> _mylistboxdata = new ObservableCollection<ViewList>();
+
+        public ObservableCollection<ViewList> Mylistboxdata
+        {
+            get => _mylistboxdata;
+            set => Set(ref _mylistboxdata, value);
+        }
+        #endregion
+
+
         #region Openfile
-        
+
         public ICommand OpenfileCommand { get; }
         private bool CanOpenfileCommandExecuted(object p) => true;
         private void OnOpenfileCommandExecuted(object p)
         {
+            _Status = "in progress";
+            _Progress = 0;
             string str = PathFinder.PathFinder_Ex();
             doc = XML_reader.find_xml_device(str);
+
         }
         #endregion
+
+       
 
         #endregion
 
@@ -91,7 +157,15 @@ namespace MVVM_XML_RS.ViewModels
             CloseApplicationCommand = new LambdaCommand(OnCloseApplicationCommandExecuted, CanCloseApplicationCommandExecuted);
             OpenfileCommand = new LambdaCommand(OnOpenfileCommandExecuted, CanOpenfileCommandExecuted);
             // MoveHeadApplicationCommand = new LambdaCommand(OnMoveHeadApplicationCommandExecuted, CanMoveHeadApplicationCommandExecuted);
+            ViewListboxCommand = new LambdaCommand(OnViewListboxCommandExecuted, CanViewListboxCommandExecuted);
             #endregion
+
+            _mylistboxdata.Add(new ViewList()
+            {
+                SettingInfo = "dfe",
+                SettingValue = "ffe",
+                SettingButton = "Изменить",
+            });
         }
     }
 }

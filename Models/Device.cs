@@ -6,23 +6,28 @@ using System.Threading.Tasks;
 
 namespace MVVM_XML_RS.Models
 {
+	internal class ViewList
+	{
+		public string SettingInfo { get; set; }
+		public string SettingValue { get; set; }
+		public string SettingButton { get; set; }
+	}
 	internal class Doc
     {
 		//public string info { get; set; }
 		public string RSSETUP { get; set; }
 		public List<Device> Devices { get; set; }
-
 	}
-
 	internal class Device
 	{
 		public string Name { get; set; }
 		public int StressDeviceType { get; set; }
 		public int Number { get; set; }
-		public Deviceinfo Info { get; set; }
+		public List<string> DeviceName { get; set; }
+		public List<string> DeviceInfo { get; set; }
 	}
 
-    internal struct Deviceinfo
+	internal struct Deviceinfo
     {
         public int StressDeviceType { get; set; }
         public int StressDeviceVeloType { get; set; }
