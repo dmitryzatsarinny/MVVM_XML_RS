@@ -81,56 +81,21 @@ namespace MVVM_XML_RS.ViewModels
         }
         #endregion
 
-        #region ViewListbox
-        public ICommand ViewListboxCommand { get; }
-        private bool CanViewListboxCommandExecuted(object p) => true;
-        private void OnViewListboxCommandExecuted(object p)
-        {
-            _mylistboxdata.Clear();
-            if ((_doc != null) && (_index <= _doc.Devices.Count) && (_index >= 0))
-            {
-                _ViewDevice = "Выбрано устройство " + _doc.Devices[_index].Name;
-                for (int i = 0; i < 29; i++)
-                    _mylistboxdata.Add(new ViewList()
-                    {
-                        SettingInfo = _doc.Devices[_index].DeviceName[i],
-                        SettingValue = _doc.Devices[_index].DeviceInfo[i],
-                        SettingButton = "Изменить",
-                    });
-            }
+ 
 
-        }
+
         #endregion
-
-        #region ViewIndex
-        private int _index = -1;
-        public int Index
-        {
-            get => _index;
-            set => Set(ref _index, value);
+        private ObservableCollection<DeviceView> _DeviceViews = new ObservableCollection<DeviceView>();
+        public ObservableCollection<DeviceView> DeviceViews {
+            get => _DeviceViews;
+            set => Set(ref _DeviceViews, value);
         }
-        #endregion
-
-        #region ViewDevice
-        private string _ViewDevice = "No device";
-        public string ViewDevice
+        private DeviceView _SelectedDevice;
+        public DeviceView SelectedDevice
         {
-            get => _ViewDevice;
-            
-            set => Set(ref _ViewDevice, value);
+            get => _SelectedDevice;
+            set => Set(ref _SelectedDevice, value);
         }
-        #endregion
-
-        #region database
-        private ObservableCollection<ViewList> _mylistboxdata = new ObservableCollection<ViewList>();
-
-        public ObservableCollection<ViewList> Mylistboxdata
-        {
-            get => _mylistboxdata;
-            set => Set(ref _mylistboxdata, value);
-        }
-        #endregion
-
 
         #region Openfile
 
@@ -143,12 +108,29 @@ namespace MVVM_XML_RS.ViewModels
             string str = PathFinder.PathFinder_Ex();
             doc = XML_reader.find_xml_device(str);
 
+            _DeviceViews.Clear();
+            if (_doc != null)
+            {
+                for(int i = 0; i < _doc.Devices.Count; i++)
+                {
+                    DeviceView deviceView = new DeviceView();
+                    deviceView.DeviceName = _doc.Devices[i].Name;
+                    List<ViewList> viewList = new List<ViewList>();
+
+                    for (int j = 0; j < 29; j++)
+                        viewList.Add(new ViewList()
+                        {
+                            SettingInfo = _doc.Devices[i].DeviceName[j],
+                            SettingValue = _doc.Devices[i].DeviceInfo[j],
+                            SettingButton = "Изменить",
+                        });
+                    deviceView.ViewLists = viewList;
+                    _DeviceViews.Add(deviceView);
+                }
+            }
         }
         #endregion
 
-       
-
-        #endregion
 
         //конструктор
         public MainWindowViewModel()
@@ -158,22 +140,7 @@ namespace MVVM_XML_RS.ViewModels
             CloseApplicationCommand = new LambdaCommand(OnCloseApplicationCommandExecuted, CanCloseApplicationCommandExecuted);
             OpenfileCommand = new LambdaCommand(OnOpenfileCommandExecuted, CanOpenfileCommandExecuted);
             // MoveHeadApplicationCommand = new LambdaCommand(OnMoveHeadApplicationCommandExecuted, CanMoveHeadApplicationCommandExecuted);
-            ViewListboxCommand = new LambdaCommand(OnViewListboxCommandExecuted, CanViewListboxCommandExecuted);
             #endregion
-
-            _mylistboxdata.Add(new ViewList()
-            {
-                SettingInfo = "dfe",
-                SettingValue = "ffe",
-                SettingButton = "Изменить",
-            });
-
-            _mylistboxdata.Add(new ViewList()
-            {
-                SettingInfo = "dwee",
-                SettingValue = "132123fe",
-                SettingButton = "Изменить",
-            });
         }
     }
 }

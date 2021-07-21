@@ -25,8 +25,6 @@
         <cmd:CloseApplicationCommand x:Key="CloseApplicationCommand"/>
     </Window.Resources>
     
-    
-
     <Window.InputBindings>
         <KeyBinding Modifiers="Control" Key="Q" Command="{StaticResource CloseApplicationCommand}"/>
     </Window.InputBindings>
@@ -40,15 +38,15 @@
                 <TextBlock Margin="10,0,0,0"  Text="{Binding Title}" FontSize="18" VerticalAlignment="Center"/>
                 <Button Command="{StaticResource CloseApplicationCommand}"  Margin="0,0,1,0" FontSize="20" Content="x" Height="28" Width="28" VerticalAlignment="Center" HorizontalContentAlignment="Center" HorizontalAlignment="Right" FontWeight="Bold" Background="#FFEC5454" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Padding="0,-7,0,0" UseLayoutRounding="False"/>
             </DockPanel>
-            
+
             <Menu DockPanel.Dock="Top" Height="25" Background="GhostWhite">
 
-            <Menu.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <DockPanel HorizontalAlignment="Stretch">
-                    </DockPanel>
-                </ItemsPanelTemplate>
-            </Menu.ItemsPanel>
+                <Menu.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <DockPanel HorizontalAlignment="Stretch">
+                        </DockPanel>
+                    </ItemsPanelTemplate>
+                </Menu.ItemsPanel>
 
                 <MenuItem FontSize="16" Command ="{Binding OpenfileCommand}">
                     <MenuItem.Header>
@@ -72,15 +70,12 @@
                     <MenuItem.Header>
                         <StackPanel Orientation="Horizontal">
                             <fa:FontAwesome Icon="Solid_download" Height="17"/>
-                        <TextBlock Text=" Сохранить"/>
-                    </StackPanel>
+                            <TextBlock Text=" Сохранить"/>
+                        </StackPanel>
                     </MenuItem.Header>
                 </MenuItem>
-                <TextBox Text="{Binding Index}" TextWrapping="Wrap" Width="120"/>
-                <Button Width="60" Height="15" Command="{Binding ViewListboxCommand}"/>
             </Menu>
 
-            
             <StatusBar DockPanel.Dock="Bottom" Height="25">
                 <StatusBarItem  HorizontalAlignment="Right">
                     
@@ -100,20 +95,48 @@
                 </StatusBarItem>
             </StatusBar>
 
-                <TabControl>
-                    <TabItem Header="Устройства" Height="25" FontSize="16" Background="#FF55C713">
-                        <DockPanel>
-                        </DockPanel>
-                    </TabItem>
-                    <TabItem Header="Конфигурация" Height="25" FontSize="16" Background="#FF55C713">
-                    <GroupBox Header="{Binding Index, TargetNullValue='Устройство не выбрано'}" FontSize="16">
-
-                        <DataGrid ItemsSource="{Binding Mylistboxdata}" CanUserSortColumns="False" AutoGenerateColumns="False" 
+            <TabControl>
+                <TabItem Header="Устройства" Style="{DynamicResource TabItemStyle}">
+                    <ListBox ItemsSource="{Binding DeviceViews}" SelectedIndex="0"
+                             DisplayMemberPath="DeviceName"
+                             SelectedItem="{Binding SelectedDevice}"
+                             >
+                    </ListBox>
+                </TabItem>
+                <TabItem Header="Конфигурация" Style="{DynamicResource TabItemStyle}">
+                    <GroupBox>
+                        <GroupBox.Header>
+                            <TextBlock Text="{Binding SelectedDevice.DeviceName, StringFormat=Устройство : {0}, TargetNullValue='Устройство не выбрано'}" Style="{StaticResource HeaderStyle}"/>
+                        </GroupBox.Header>
+                        <DataGrid ItemsSource="{Binding SelectedDevice.ViewLists}" CanUserSortColumns="False" AutoGenerateColumns="False" 
                                   IsReadOnly="True"
-                                  
+                                  CanUserAddRows="False"
+                                  CanUserDeleteRows="False"
+                                  CanUserReorderColumns="False"
+                                  CanUserResizeRows="False"
                                   GridLinesVisibility="Vertical"
                                   VerticalGridLinesBrush="DarkGray"
-                                  AlternatingRowBackground="LightGray">
+                                  AlternatingRowBackground="WhiteSmoke"
+                                  RowBackground="White"
+                                  Background="FloralWhite"
+                                  SelectionMode="Single">
+
+                                  <DataGrid.Resources>
+                                        <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="Transparent"/>
+                                        <SolidColorBrush x:Key="{x:Static SystemColors.HighlightTextBrushKey}" Color="Black"/>
+                                  </DataGrid.Resources>
+
+                                  <DataGrid.CellStyle>
+                                        <Style TargetType="{x:Type DataGridCell}">
+                                            <Setter Property="BorderBrush" Value="{Binding MyProperty}" />
+                                            <Style.Triggers>
+                                                <Trigger Property="IsSelected" Value="True">
+                                                    <Setter Property="BorderBrush" Value="Transparent"/>
+                                                </Trigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                  </DataGrid.CellStyle>
+
                             <DataGrid.Columns>
                                 <DataGridTemplateColumn Width="200" Header="         Характеристика         ">
                                     <DataGridTemplateColumn.HeaderStyle>
@@ -141,7 +164,7 @@
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
-                                <DataGridTemplateColumn Header="      Изменение параметра      " Width="*">
+                                <DataGridTemplateColumn Header="   Изменение параметра         " Width="*">
                                     <DataGridTemplateColumn.HeaderStyle>
                                         <Style TargetType="{x:Type DataGridColumnHeader}">
                                             <Setter Property="HorizontalAlignment" Value="Center"/>
@@ -150,7 +173,7 @@
                                     </DataGridTemplateColumn.HeaderStyle>
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate DataType="Devinfo:ViewList">
-                                            <Button Content="{Binding SettingButton}"/>
+                                            <Button Content="{Binding SettingButton}" Style="{DynamicResource ButtonStyle}"/>
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>

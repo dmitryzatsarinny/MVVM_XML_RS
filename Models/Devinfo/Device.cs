@@ -6,6 +6,11 @@ using System.Threading.Tasks;
 
 namespace MVVM_XML_RS.Models.Devinfo
 {
+	internal class DeviceView
+    {
+		public string DeviceName { get; set; }
+		public ICollection<ViewList> ViewLists { get; set; }
+    }
 	internal class ViewList 
 	{
 		public string SettingInfo { get; set; }

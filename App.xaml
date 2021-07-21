@@ -4,6 +4,13 @@
              xmlns:local="clr-namespace:MVVM_XML_RS"
              StartupUri="Views\Windows\MainWindow.xaml">
     <Application.Resources>
-         
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Resources/Styles/Buttons.xaml"/>
+                <ResourceDictionary Source="Resources/Styles/Tabitems.xaml"/>
+                <ResourceDictionary Source="Resources/Styles/Headers.xaml"/>
+                <ResourceDictionary Source="Resources/Styles/DataGridS.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>
