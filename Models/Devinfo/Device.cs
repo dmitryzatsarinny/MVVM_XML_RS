@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MVVM_XML_RS.Models
+namespace MVVM_XML_RS.Models.Devinfo
 {
-	internal class ViewList
+	internal class ViewList 
 	{
 		public string SettingInfo { get; set; }
 		public string SettingValue { get; set; }

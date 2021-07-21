@@ -1,4 +1,4 @@
-﻿using MVVM_XML_RS.Models;
+﻿using MVVM_XML_RS.Models.Devinfo;
 using System;
 using System.Collections.Generic;
 using System.Linq;

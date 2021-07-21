@@ -7,7 +7,7 @@ using System.Text;
 using System.Windows;
 using System.Windows.Input;
 using System.Collections.ObjectModel;
-using MVVM_XML_RS.Models;
+using MVVM_XML_RS.Models.Devinfo;
 using System.Linq;
 
 namespace MVVM_XML_RS.ViewModels
@@ -116,6 +116,7 @@ namespace MVVM_XML_RS.ViewModels
         public string ViewDevice
         {
             get => _ViewDevice;
+            
             set => Set(ref _ViewDevice, value);
         }
         #endregion
@@ -164,6 +165,13 @@ namespace MVVM_XML_RS.ViewModels
             {
                 SettingInfo = "dfe",
                 SettingValue = "ffe",
+                SettingButton = "Изменить",
+            });
+
+            _mylistboxdata.Add(new ViewList()
+            {
+                SettingInfo = "dwee",
+                SettingValue = "132123fe",
                 SettingButton = "Изменить",
             });
         }

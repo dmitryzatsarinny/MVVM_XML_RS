@@ -7,6 +7,7 @@
         xmlns:cmd="clr-namespace:MVVM_XML_RS.Infrastructure.Commands"
         xmlns:l="clr-namespace:MVVM_XML_RS" 
         xmlns:fa="http://schemas.fontawesome.com/icons/"
+        xmlns:Devinfo="clr-namespace:MVVM_XML_RS.Models.Devinfo"
         
         WindowStyle="None"
         WindowStartupLocation="CenterScreen"
@@ -22,26 +23,8 @@
 
     <Window.Resources>
         <cmd:CloseApplicationCommand x:Key="CloseApplicationCommand"/>
-
-        <DataTemplate x:Key="DefaultListBox">
-            <Grid x:Name="GridItem">
-
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="200" />
-                    <ColumnDefinition Width="400" />
-                    <ColumnDefinition Width="148" />
-                </Grid.ColumnDefinitions>
-
-                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="0" Text="{Binding Path=SettingInfo}"/>
-                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Text="{Binding Path=SettingValue}"/>
-                <Button Content="{Binding Path=SettingButton}" Grid.Column="2" Margin="2" Background="#0000" BorderBrush="#0000"/>
-
-                <Border BorderBrush="Green" BorderThickness="2" Grid.Column="0" CornerRadius="4"/>
-                <Border BorderBrush="Green" BorderThickness="2" Grid.Column="1" CornerRadius="4"/>
-                <Border BorderBrush="Red" BorderThickness="2" Grid.Column="2" CornerRadius="4"/>
-            </Grid>
-        </DataTemplate>
     </Window.Resources>
+    
     
 
     <Window.InputBindings>
@@ -117,41 +100,65 @@
                 </StatusBarItem>
             </StatusBar>
 
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="Auto" />
-                </Grid.RowDefinitions>
                 <TabControl>
                     <TabItem Header="Устройства" Height="25" FontSize="16" Background="#FF55C713">
                         <DockPanel>
                         </DockPanel>
                     </TabItem>
                     <TabItem Header="Конфигурация" Height="25" FontSize="16" Background="#FF55C713">
-                        <GroupBox Header="Характеристики" FontSize="16">
+                    <GroupBox Header="{Binding Index, TargetNullValue='Устройство не выбрано'}" FontSize="16">
 
-                            <ListBox Name="MyListBox" ItemTemplate="{StaticResource DefaultListBox}" ItemsSource="{Binding Mylistboxdata}">
-                                <ListBox.ItemContainerStyle>
-                                    <Style TargetType="{x:Type ListBoxItem}">
-                                        <Setter Property="Focusable" Value="False"/>
-                                    </Style>
-                                </ListBox.ItemContainerStyle>
-                            </ListBox>
-                        </GroupBox>
-                    </TabItem>
-                </TabControl>
-
-                <Grid Grid.Row="0" Height="{Binding ActualHeight, ElementName=tabItem}" VerticalAlignment="Top" Margin="0,2,0,0">
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-                        <TextBlock VerticalAlignment="Center" Text="{Binding ViewDevice}" FontSize="16" Foreground="Black"/>
-                    </StackPanel>
-                </Grid>
-
-            </Grid>
-
-            
-            
-
+                        <DataGrid ItemsSource="{Binding Mylistboxdata}" CanUserSortColumns="False" AutoGenerateColumns="False" 
+                                  IsReadOnly="True"
+                                  
+                                  GridLinesVisibility="Vertical"
+                                  VerticalGridLinesBrush="DarkGray"
+                                  AlternatingRowBackground="LightGray">
+                            <DataGrid.Columns>
+                                <DataGridTemplateColumn Width="200" Header="         Характеристика         ">
+                                    <DataGridTemplateColumn.HeaderStyle>
+                                        <Style TargetType="{x:Type DataGridColumnHeader}">
+                                            <Setter Property="HorizontalAlignment" Value="Center"/>
+                                            <Setter Property="IsHitTestVisible" Value="False"/>
+                                        </Style>
+                                    </DataGridTemplateColumn.HeaderStyle>
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate DataType="Devinfo:ViewList">
+                                            <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding SettingInfo}"/>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTemplateColumn Header="                      Значение параметра                      " Width="350">
+                                    <DataGridTemplateColumn.HeaderStyle>
+                                        <Style TargetType="{x:Type DataGridColumnHeader}">
+                                            <Setter Property="HorizontalAlignment" Value="Center"/>
+                                            <Setter Property="IsHitTestVisible" Value="False"/>
+                                        </Style>
+                                    </DataGridTemplateColumn.HeaderStyle>
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate DataType="Devinfo:ViewList">
+                                            <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding SettingValue}"/>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTemplateColumn Header="      Изменение параметра      " Width="*">
+                                    <DataGridTemplateColumn.HeaderStyle>
+                                        <Style TargetType="{x:Type DataGridColumnHeader}">
+                                            <Setter Property="HorizontalAlignment" Value="Center"/>
+                                            <Setter Property="IsHitTestVisible" Value="False"/>
+                                        </Style>
+                                    </DataGridTemplateColumn.HeaderStyle>
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate DataType="Devinfo:ViewList">
+                                            <Button Content="{Binding SettingButton}"/>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </GroupBox>
+                </TabItem>
+            </TabControl>
         </DockPanel>
     </Border>
 </Window>
