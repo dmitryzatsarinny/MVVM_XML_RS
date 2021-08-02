@@ -114,6 +114,7 @@ namespace MVVM_XML_RS.ViewModels
                 for(int i = 0; i < _doc.Devices.Count; i++)
                 {
                     DeviceView deviceView = new DeviceView();
+                    deviceView.deviceinfo = _doc.Devices[i].deviceinfo;
                     deviceView.DeviceName = _doc.Devices[i].Name;
                     List<ViewList> viewList = new List<ViewList>();
 
@@ -141,6 +142,20 @@ namespace MVVM_XML_RS.ViewModels
             OpenfileCommand = new LambdaCommand(OnOpenfileCommandExecuted, CanOpenfileCommandExecuted);
             // MoveHeadApplicationCommand = new LambdaCommand(OnMoveHeadApplicationCommandExecuted, CanMoveHeadApplicationCommandExecuted);
             #endregion
+            //DeviceView deviceView1 = new DeviceView();
+            //deviceView1.DeviceName = "efsef";
+            //Deviceinfo deviceinfo1 = new Deviceinfo();
+            //deviceinfo1.BTDeviceName = "154856235";
+            //deviceinfo1.StressDeviceType = "1";
+            //deviceView1.deviceinfo = deviceinfo1;
+            //_DeviceViews.Add(deviceView1);
+            //DeviceView deviceView2 = new DeviceView();
+            //deviceView2.DeviceName = "efjtsef";
+            //Deviceinfo deviceinfo2 = new Deviceinfo();
+            //deviceinfo2.BTDeviceName = "15675235";
+            //deviceinfo2.StressDeviceType = "0";
+            //deviceView2.deviceinfo = deviceinfo2;
+            //_DeviceViews.Add(deviceView2);
         }
     }
 }

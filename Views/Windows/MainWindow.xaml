@@ -97,10 +97,47 @@
 
             <TabControl>
                 <TabItem Header="Устройства" Style="{DynamicResource TabItemStyle}">
-                    <ListBox ItemsSource="{Binding DeviceViews}" SelectedIndex="0"
-                             DisplayMemberPath="DeviceName"
-                             SelectedItem="{Binding SelectedDevice}"
-                             >
+                    <ListBox SelectedIndex="0" SelectedItem="{Binding SelectedDevice}" ItemsSource="{Binding DeviceViews}">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="10"/>
+                                        <ColumnDefinition Width="250"/>
+                                        <ColumnDefinition Width="10"/>
+                                        <ColumnDefinition Width="300"/>
+                                        <ColumnDefinition Width="10"/>
+                                        <ColumnDefinition Width="200"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Border Grid.Column="1" Style="{DynamicResource BorderDevice}" BorderBrush="Gainsboro">
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="Устройство: " />
+                                            <TextBlock Text="{Binding DeviceName}"/>
+                                        </StackPanel>
+                                    </Border>
+                                    <Border Grid.Column="3" Style="{DynamicResource BorderDevice}" BorderBrush="Gainsboro">
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="Имя кардиографа: " />
+                                            <TextBlock Text="{Binding deviceinfo.BTDeviceName}"/>
+                                        </StackPanel>
+                                    </Border>
+                                    <Border Grid.Column="5" Style="{DynamicResource BorderDevice}" BorderBrush="Gainsboro">
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="Тип: " />
+                                            <TextBlock Name="Type" Text="{Binding deviceinfo.StressDeviceType}"/>
+                                        </StackPanel>
+                                    </Border>
+                                </Grid>
+                                <DataTemplate.Triggers>
+                                    <DataTrigger Binding="{Binding deviceinfo.StressDeviceType}" Value="0">
+                                        <Setter TargetName="Type" Property="Text" Value="Велосипед"/>
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding deviceinfo.StressDeviceType}" Value="1">
+                                        <Setter TargetName="Type" Property="Text" Value="Тредмил"/>
+                                    </DataTrigger>
+                                </DataTemplate.Triggers>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
                     </ListBox>
                 </TabItem>
                 <TabItem Header="Конфигурация" Style="{DynamicResource TabItemStyle}">

@@ -10,6 +10,7 @@
                 <ResourceDictionary Source="Resources/Styles/Tabitems.xaml"/>
                 <ResourceDictionary Source="Resources/Styles/Headers.xaml"/>
                 <ResourceDictionary Source="Resources/Styles/DataGridS.xaml"/>
+                <ResourceDictionary Source="Resources/Styles/Border.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>
