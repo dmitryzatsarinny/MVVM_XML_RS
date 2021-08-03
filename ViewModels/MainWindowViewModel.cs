@@ -23,43 +23,33 @@ namespace MVVM_XML_RS.ViewModels
         }
         #endregion
 
-        #region Заголовок окна
-        private string _Title = "Reabilitation Param Changer";
-        /// <summary>Заголовок окна</summary>
-        public string Title
+        private string _windowTitle = "Reabilitation Param Changer";
+        public string WindowTitle
         {
-            get => _Title;
-            set => Set(ref _Title, value);
+            get => _windowTitle;
+            set => Set(ref _windowTitle, value);
         }
-        #endregion
-        #region Версия приложения
-        private string _Version = "Version " + "1.1";
-        public string Version
+        
+        private string _applicationVersion = "Version " + "1.1";
+        public string ApplicationVersion
         {
-            get => _Version;
-            set => Set(ref _Version, value);
+            get => _applicationVersion;
+            set => Set(ref _applicationVersion, value);
         }
-        #endregion
 
-        #region Статус
-        public string _Status = "Ready";
+        private string _status = "Ready";
         public string Status
         {
-            get => _Status;
-            set => Set(ref _Status, value);
+            get => _status;
+            set => Set(ref _status, value);
         }
-        #endregion
 
-        #region Прогресс
-        public int _Progress = 100;
+        private int _progress = 100;
         public int Progress
         {
-            get => _Progress;
-            set => Set(ref _Progress, value);
+            get => _progress;
+            set => Set(ref _progress, value);
         }
-        #endregion
-
-
 
         #region Команды
 
