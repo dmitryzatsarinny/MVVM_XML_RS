@@ -33,7 +33,7 @@
         <DockPanel>
 
             <DockPanel DockPanel.Dock="Top" Height="30" Background="#FFA6CDF0">
-                <TextBlock Margin="10,0,0,0"  Text="{Binding Title}" FontSize="18" VerticalAlignment="Center"/>
+                <TextBlock Margin="10,0,0,0"  Text="{Binding WindowTitle}" FontSize="18" VerticalAlignment="Center"/>
                 <Button Command="{StaticResource CloseApplicationCommand}"  Margin="0,0,1,0" FontSize="20" Content="x" Height="28" Width="28" VerticalAlignment="Center" HorizontalContentAlignment="Center" HorizontalAlignment="Right" FontWeight="Bold" Background="#FFEC5454" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Padding="0,-7,0,0" UseLayoutRounding="False"/>
             </DockPanel>
 
@@ -88,7 +88,7 @@
                 <StatusBarItem  HorizontalAlignment="Right">
                     <StackPanel Orientation="Horizontal">
                         <fa:FontAwesome Icon="Solid_CodeBranch" Height="16"  Margin="0,3,10,0"/>
-                        <TextBlock Text="{Binding Version}" Margin="0,-2,15,0" FontSize="16"/>
+                        <TextBlock Text="{Binding ApplicationVersion}" Margin="0,-2,15,0" FontSize="16"/>
                     </StackPanel>
                 </StatusBarItem>
             </StatusBar>
