@@ -5,7 +5,6 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:vm="clr-namespace:MVVM_XML_RS.ViewModels"
         xmlns:cmd="clr-namespace:MVVM_XML_RS.Infrastructure.Commands"
-        xmlns:l="clr-namespace:MVVM_XML_RS" 
         xmlns:fa="http://schemas.fontawesome.com/icons/"
         xmlns:Devinfo="clr-namespace:MVVM_XML_RS.Models.Devinfo"
         
@@ -34,7 +33,6 @@
         <DockPanel>
 
             <DockPanel DockPanel.Dock="Top" Height="30" Background="#FFA6CDF0">
-                <!--<Image Source=""/>-->
                 <TextBlock Margin="10,0,0,0"  Text="{Binding Title}" FontSize="18" VerticalAlignment="Center"/>
                 <Button Command="{StaticResource CloseApplicationCommand}"  Margin="0,0,1,0" FontSize="20" Content="x" Height="28" Width="28" VerticalAlignment="Center" HorizontalContentAlignment="Center" HorizontalAlignment="Right" FontWeight="Bold" Background="#FFEC5454" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Padding="0,-7,0,0" UseLayoutRounding="False"/>
             </DockPanel>
@@ -96,51 +94,13 @@
             </StatusBar>
 
             <TabControl>
+
                 <TabItem Header="Устройства" Style="{DynamicResource TabItemStyle}">
-                    <ListBox SelectedIndex="0" SelectedItem="{Binding SelectedDevice}" ItemsSource="{Binding DeviceViews}">
-                        <ListBox.ItemTemplate>
-                            <DataTemplate>
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="10"/>
-                                        <ColumnDefinition Width="250"/>
-                                        <ColumnDefinition Width="10"/>
-                                        <ColumnDefinition Width="300"/>
-                                        <ColumnDefinition Width="10"/>
-                                        <ColumnDefinition Width="200"/>
-                                    </Grid.ColumnDefinitions>
-                                    <Border Grid.Column="1" Style="{DynamicResource BorderDevice}" BorderBrush="Gainsboro">
-                                        <StackPanel Orientation="Horizontal">
-                                            <TextBlock Text="Устройство: " />
-                                            <TextBlock Text="{Binding DeviceName}"/>
-                                        </StackPanel>
-                                    </Border>
-                                    <Border Grid.Column="3" Style="{DynamicResource BorderDevice}" BorderBrush="Gainsboro">
-                                        <StackPanel Orientation="Horizontal">
-                                            <TextBlock Text="Имя кардиографа: " />
-                                            <TextBlock Text="{Binding deviceinfo.BTDeviceName}"/>
-                                        </StackPanel>
-                                    </Border>
-                                    <Border Grid.Column="5" Style="{DynamicResource BorderDevice}" BorderBrush="Gainsboro">
-                                        <StackPanel Orientation="Horizontal">
-                                            <TextBlock Text="Тип: " />
-                                            <TextBlock Name="Type" Text="{Binding deviceinfo.StressDeviceType}"/>
-                                        </StackPanel>
-                                    </Border>
-                                </Grid>
-                                <DataTemplate.Triggers>
-                                    <DataTrigger Binding="{Binding deviceinfo.StressDeviceType}" Value="0">
-                                        <Setter TargetName="Type" Property="Text" Value="Велосипед"/>
-                                    </DataTrigger>
-                                    <DataTrigger Binding="{Binding deviceinfo.StressDeviceType}" Value="1">
-                                        <Setter TargetName="Type" Property="Text" Value="Тредмил"/>
-                                    </DataTrigger>
-                                </DataTemplate.Triggers>
-                            </DataTemplate>
-                        </ListBox.ItemTemplate>
-                    </ListBox>
+                    <ListBox SelectedIndex="0" SelectedItem="{Binding SelectedDevice}" ItemsSource="{Binding DeviceViews}" ItemContainerStyle="{DynamicResource ListBoxItemDevice}" />
                 </TabItem>
+
                 <TabItem Header="Конфигурация" Style="{DynamicResource TabItemStyle}">
+                    
                     <GroupBox>
                         <GroupBox.Header>
                             <TextBlock Text="{Binding SelectedDevice.DeviceName, StringFormat=Устройство : {0}, TargetNullValue='Устройство не выбрано'}" Style="{StaticResource HeaderStyle}"/>
