@@ -2,6 +2,7 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" mc:Ignorable="d"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:vm="clr-namespace:MVVM_XML_RS.ViewModels"
         xmlns:cmd="clr-namespace:MVVM_XML_RS.Infrastructure.Commands"
@@ -33,7 +34,7 @@
         <DockPanel>
 
             <DockPanel DockPanel.Dock="Top" Height="30" Background="#FFA6CDF0">
-                <TextBlock Margin="10,0,0,0"  Text="{Binding Title}" FontSize="18" VerticalAlignment="Center"/>
+                <TextBlock Margin="10,0,0,0"  Text="{Binding WindowTitle}" FontSize="18" VerticalAlignment="Center"/>
                 <Button Command="{StaticResource CloseApplicationCommand}"  Margin="0,0,1,0" FontSize="20" Content="x" Height="28" Width="28" VerticalAlignment="Center" HorizontalContentAlignment="Center" HorizontalAlignment="Right" FontWeight="Bold" Background="#FFEC5454" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Padding="0,-7,0,0" UseLayoutRounding="False"/>
             </DockPanel>
 
@@ -87,20 +88,25 @@
                 </StatusBarItem>
                 <StatusBarItem  HorizontalAlignment="Right">
                     <StackPanel Orientation="Horizontal">
-                        <fa:FontAwesome Icon="Solid_CodeBranch" Height="16"  Margin="0,3,10,0"/>
-                        <TextBlock Text="{Binding Version}" Margin="0,-2,15,0" FontSize="16"/>
+                        <fa:FontAwesome Icon="Solid_CodeBranch" Margin="0,0,5,0" FontSize="18" Foreground="SlateBlue"/>
+                        <TextBlock Text="{Binding ApplicationVersion}" Margin="0,-2,15,0" FontSize="16" Foreground="SlateBlue"/>
                     </StackPanel>
                 </StatusBarItem>
             </StatusBar>
 
-            <TabControl>
+            <TabControl SelectedIndex="{Binding SelectPageIndex}">
 
                 <TabItem Header="Устройства" Style="{DynamicResource TabItemStyle}">
-                    <ListBox SelectedIndex="0" SelectedItem="{Binding SelectedDevice}" ItemsSource="{Binding DeviceViews}" ItemContainerStyle="{DynamicResource ListBoxItemDevice}" />
+                    <ListBox SelectedIndex="0" SelectedItem="{Binding SelectedDevice}" ItemsSource="{Binding DeviceViews}" ItemContainerStyle="{DynamicResource ListBoxItemDevice}">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="MouseDoubleClick">
+                                <i:InvokeCommandAction Command="{Binding ChangeIndexCommand}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </ListBox>
                 </TabItem>
 
                 <TabItem Header="Конфигурация" Style="{DynamicResource TabItemStyle}">
-                    
                     <GroupBox>
                         <GroupBox.Header>
                             <TextBlock Text="{Binding SelectedDevice.DeviceName, StringFormat=Устройство : {0}, TargetNullValue='Устройство не выбрано'}" Style="{StaticResource HeaderStyle}"/>

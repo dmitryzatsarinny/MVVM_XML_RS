@@ -14,77 +14,62 @@ namespace MVVM_XML_RS.ViewModels
 {
     internal class MainWindowViewModel: ViewModel
     {
-        #region database
+        private int _selectPageIndex;
+        public int SelectPageIndex
+        {
+            get => _selectPageIndex;
+            set => Set(ref _selectPageIndex, value);
+        }
+
         private Doc _doc;
         public Doc doc
         {
             get => _doc;
             set => Set(ref _doc, value);
         }
-        #endregion
-
-        #region Заголовок окна
-        private string _Title = "Reabilitation Param Changer";
-        /// <summary>Заголовок окна</summary>
-        public string Title
+        private string _windowTitle = "Reabilitation Param Changer";
+        public string WindowTitle
         {
-            get => _Title;
-            set => Set(ref _Title, value);
+            get => _windowTitle;
+            set => Set(ref _windowTitle, value);
         }
-        #endregion
-        #region Версия приложения
-        private string _Version = "Version " + "1.1";
-        public string Version
+        private string _applicationVersion = "Version 1.2";
+        public string ApplicationVersion
         {
-            get => _Version;
-            set => Set(ref _Version, value);
+            get => _applicationVersion;
+            set => Set(ref _applicationVersion, value);
         }
-        #endregion
-
-        #region Статус
-        public string _Status = "Ready";
+        public string _status = "Ready";
         public string Status
         {
-            get => _Status;
-            set => Set(ref _Status, value);
+            get => _status;
+            set => Set(ref _status, value);
         }
-        #endregion
-
-        #region Прогресс
-        public int _Progress = 100;
+        public int _progress = 100;
         public int Progress
         {
-            get => _Progress;
-            set => Set(ref _Progress, value);
+            get => _progress;
+            set => Set(ref _progress, value);
         }
-        #endregion
 
-
-
-        #region Команды
-
-        #region CloseApplicationCommand
         public ICommand CloseApplicationCommand { get;  }
         private bool CanCloseApplicationCommandExecuted(object p) => true;
         private void OnCloseApplicationCommandExecuted(object p)
         {
             Application.Current.Shutdown();
         }
-        #endregion
-
-        #region MoveHeadApplicationCommand
+        public ICommand ChangeIndexCommand { get; }
+        private bool CanChangeIndexCommand(object p) => true;
+        private void OnChangeIndexCommand(object p)
+        {
+            SelectPageIndex = 1;
+        }
         public MouseButtonEventHandler MoveHeadApplicationCommand { get; }
         private bool CanMoveHeadApplicationCommandExecuted(object p) => true;
         private void OnMoveHeadApplicationCommandExecuted(object p)
         {
             Application.Current.Shutdown();
         }
-        #endregion
-
- 
-
-
-        #endregion
         private ObservableCollection<DeviceView> _DeviceViews = new ObservableCollection<DeviceView>();
         public ObservableCollection<DeviceView> DeviceViews {
             get => _DeviceViews;
@@ -96,15 +81,12 @@ namespace MVVM_XML_RS.ViewModels
             get => _SelectedDevice;
             set => Set(ref _SelectedDevice, value);
         }
-
-        #region Openfile
-
         public ICommand OpenfileCommand { get; }
         private bool CanOpenfileCommandExecuted(object p) => true;
         private void OnOpenfileCommandExecuted(object p)
         {
-            _Status = "in progress";
-            _Progress = 0;
+            _status = "in progress";
+            _progress = 0;
             string str = PathFinder.PathFinder_Ex();
             doc = XML_reader.find_xml_device(str);
 
@@ -130,16 +112,13 @@ namespace MVVM_XML_RS.ViewModels
                 }
             }
         }
-        #endregion
-
-
-        //конструктор
         public MainWindowViewModel()
         {
             #region Команды
 
             CloseApplicationCommand = new LambdaCommand(OnCloseApplicationCommandExecuted, CanCloseApplicationCommandExecuted);
             OpenfileCommand = new LambdaCommand(OnOpenfileCommandExecuted, CanOpenfileCommandExecuted);
+            ChangeIndexCommand = new LambdaCommand(OnChangeIndexCommand, CanChangeIndexCommand);
             // MoveHeadApplicationCommand = new LambdaCommand(OnMoveHeadApplicationCommandExecuted, CanMoveHeadApplicationCommandExecuted);
             #endregion
             DeviceView deviceView1 = new DeviceView();

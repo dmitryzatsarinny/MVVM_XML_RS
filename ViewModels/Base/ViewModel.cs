@@ -27,7 +27,6 @@ namespace MVVM_XML_RS.ViewModels.Base
         }
 
         private bool _Disposed;
-
         protected virtual void Dispose(bool Disposing)
         {
             if (!Disposing || _Disposed) return;
