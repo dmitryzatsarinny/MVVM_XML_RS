@@ -33,4 +33,5 @@ namespace MVVM_XML_RS.ViewModels.Base
             _Disposed = true;
         }
     }
+
 }

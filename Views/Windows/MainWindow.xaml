@@ -7,6 +7,7 @@
         xmlns:vm="clr-namespace:MVVM_XML_RS.ViewModels"
         xmlns:cmd="clr-namespace:MVVM_XML_RS.Infrastructure.Commands"
         xmlns:fa="http://schemas.fontawesome.com/icons/"
+        xmlns:cinchV2="clr-namespace:Cinch;assembly=Cinch.WPF"
         xmlns:Devinfo="clr-namespace:MVVM_XML_RS.Models.Devinfo"
         
         WindowStyle="None"
@@ -14,9 +15,13 @@
         ResizeMode="NoResize"
         Height="800" 
         Width="800">
-    
-   
-    
+
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="MouseLeftButtonDown">
+                    <cinchV2:EventToCommandTrigger Command="{Binding MouseLeftButtonDown}" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+
     <Window.DataContext>
         <vm:MainWindowViewModel/>
     </Window.DataContext>
@@ -34,6 +39,11 @@
         <DockPanel>
 
             <DockPanel DockPanel.Dock="Top" Height="30" Background="#FFA6CDF0">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="MouseLeftButtonDown">
+                        <i:InvokeCommandAction Command="{Binding IsmouseonheaderCommand}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
                 <TextBlock Margin="10,0,0,0"  Text="{Binding WindowTitle}" FontSize="18" VerticalAlignment="Center"/>
                 <Button Command="{StaticResource CloseApplicationCommand}"  Margin="0,0,1,0" FontSize="20" Content="x" Height="28" Width="28" VerticalAlignment="Center" HorizontalContentAlignment="Center" HorizontalAlignment="Right" FontWeight="Bold" Background="#FFEC5454" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Padding="0,-7,0,0" UseLayoutRounding="False"/>
             </DockPanel>

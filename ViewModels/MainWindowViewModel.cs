@@ -9,18 +9,27 @@ using System.Windows.Input;
 using System.Collections.ObjectModel;
 using MVVM_XML_RS.Models.Devinfo;
 using System.Linq;
+using Cinch;
 
 namespace MVVM_XML_RS.ViewModels
 {
     internal class MainWindowViewModel: ViewModel
     {
+        public SimpleCommand<object, EventToCommandArgs> MouseLeftButtonDown { get; private set; }
+
+        static private bool _conditionismouseonheader = false;
+        public bool Conditionismouseonheader
+        {
+            get => _conditionismouseonheader;
+            set => Set(ref _conditionismouseonheader, value);
+        }
+
         private int _selectPageIndex;
         public int SelectPageIndex
         {
             get => _selectPageIndex;
             set => Set(ref _selectPageIndex, value);
         }
-
         private Doc _doc;
         public Doc doc
         {
@@ -50,25 +59,6 @@ namespace MVVM_XML_RS.ViewModels
         {
             get => _progress;
             set => Set(ref _progress, value);
-        }
-
-        public ICommand CloseApplicationCommand { get;  }
-        private bool CanCloseApplicationCommandExecuted(object p) => true;
-        private void OnCloseApplicationCommandExecuted(object p)
-        {
-            Application.Current.Shutdown();
-        }
-        public ICommand ChangeIndexCommand { get; }
-        private bool CanChangeIndexCommand(object p) => true;
-        private void OnChangeIndexCommand(object p)
-        {
-            SelectPageIndex = 1;
-        }
-        public MouseButtonEventHandler MoveHeadApplicationCommand { get; }
-        private bool CanMoveHeadApplicationCommandExecuted(object p) => true;
-        private void OnMoveHeadApplicationCommandExecuted(object p)
-        {
-            Application.Current.Shutdown();
         }
         private ObservableCollection<DeviceView> _DeviceViews = new ObservableCollection<DeviceView>();
         public ObservableCollection<DeviceView> DeviceViews {
@@ -112,13 +102,34 @@ namespace MVVM_XML_RS.ViewModels
                 }
             }
         }
+        public ICommand CloseApplicationCommand { get; }
+        private bool CanCloseApplicationCommandExecuted(object p) => true;
+        private void OnCloseApplicationCommandExecuted(object p)
+        {
+            Application.Current.Shutdown();
+        }
+        public ICommand ChangeIndexCommand { get; }
+        private bool CanChangeIndexCommand(object p) => true;
+        private void OnChangeIndexCommand(object p)
+        {
+            SelectPageIndex = 1;
+        }
+
+        public ICommand IsmouseonheaderCommand { get; }
+        private bool CanIsmouseonheaderCommand(object p) => true;
+        private void OnIsmouseonheaderCommand(object p)
+        {
+            _conditionismouseonheader = true;
+        }
+
         public MainWindowViewModel()
         {
             #region Команды
-
+            MouseLeftButtonDown = new SimpleCommand<object, EventToCommandArgs>(OnMouseLeftButtonDown);
             CloseApplicationCommand = new LambdaCommand(OnCloseApplicationCommandExecuted, CanCloseApplicationCommandExecuted);
             OpenfileCommand = new LambdaCommand(OnOpenfileCommandExecuted, CanOpenfileCommandExecuted);
             ChangeIndexCommand = new LambdaCommand(OnChangeIndexCommand, CanChangeIndexCommand);
+            IsmouseonheaderCommand = new LambdaCommand(OnIsmouseonheaderCommand, CanIsmouseonheaderCommand);
             // MoveHeadApplicationCommand = new LambdaCommand(OnMoveHeadApplicationCommandExecuted, CanMoveHeadApplicationCommandExecuted);
             #endregion
             DeviceView deviceView1 = new DeviceView();
@@ -136,5 +147,15 @@ namespace MVVM_XML_RS.ViewModels
             deviceView2.deviceinfo = deviceinfo2;
             _DeviceViews.Add(deviceView2);
         }
+
+        private static void OnMouseLeftButtonDown(EventToCommandArgs e)
+        {
+            if (_conditionismouseonheader == true)
+            {
+                ((Window) e.Sender).DragMove();
+                _conditionismouseonheader = false;
+            }
+        }
+
     }
 }
