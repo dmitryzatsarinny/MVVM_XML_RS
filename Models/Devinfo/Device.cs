@@ -3,35 +3,26 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 
 namespace MVVM_XML_RS.Models.Devinfo
 {
 	internal class DeviceView
     {
 		public string DeviceName { get; set; }
-		public ICollection<ViewList> ViewLists { get; set; }
-		public Deviceinfo deviceinfo { get; set; }
+        public Deviceinfo Deviceinfo { get; set; }
 	}
-	internal class ViewList 
-	{
-		public string SettingInfo { get; set; }
-		public string SettingValue { get; set; }
-		public string SettingButton { get; set; }
-	}
-	internal class Doc
+    internal class Doc
     {
-		//public string info { get; set; }
-		public string RSSETUP { get; set; }
-		public List<Device> Devices { get; set; }
+        public string RSSETUP { get; set; }
+		public List<DeviceView> Devices { get; set; }
 	}
-	internal class Device
-	{
-		public string Name { get; set; }
-		public List<string> DeviceName { get; set; }
-		public List<string> DeviceInfo { get; set; }
-		public Deviceinfo deviceinfo { get; set; }
-	}
-
+    public class VisualView
+    {
+        public TextBlock Characteristic { get; set; }
+        public TextBlock Parameter { get; set; }
+        public Button ChangeButton { get; set; }
+    }
 	internal struct Deviceinfo
     {
         public string StressDeviceType { get; set; }

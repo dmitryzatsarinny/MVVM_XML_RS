@@ -38,27 +38,27 @@
                             <Border Grid.Column="3" Style="{DynamicResource BorderDevice}" BorderBrush="{Binding Path=BorderBrush, ElementName=Proxy}">
                                 <StackPanel Orientation="Horizontal">
                                     <TextBlock Text="Имя кардиографа: " />
-                                    <TextBlock Text="{Binding deviceinfo.BTDeviceName}" FontWeight="Bold"/>
+                                    <TextBlock Text="{Binding Deviceinfo.BTDeviceName}" FontWeight="Bold"/>
                                 </StackPanel>
                             </Border>
                             <Border Grid.Column="5" Style="{DynamicResource BorderDevice}" BorderBrush="{Binding Path=BorderBrush, ElementName=Proxy}">
                                 <StackPanel Orientation="Horizontal">
                                     <TextBlock Text="Тип: " />
-                                    <TextBlock Name="Type" Text="{Binding deviceinfo.StressDeviceType}"/>
+                                    <TextBlock Name="Type" Text="{Binding Deviceinfo.StressDeviceType}"/>
                                     <fa:FontAwesome x:Name="Icon" Foreground="Black"/>
                                 </StackPanel>
                             </Border>
                         </Grid>
                     </Border>
                     <ControlTemplate.Triggers>
-                        <DataTrigger Binding="{Binding deviceinfo.StressDeviceType}" Value="0">
+                        <DataTrigger Binding="{Binding Deviceinfo.StressDeviceType}" Value="0">
                             <Setter TargetName="Type" Property="Text" Value="Велоэргометр"/>
                             <Setter TargetName="Type" Property="FontWeight" Value="Bold"/>
                             <Setter TargetName="Icon" Property="Icon" Value="Solid_Biking"/>
                             <Setter TargetName="Icon" Property="FontSize" Value="18"/>
                             <Setter TargetName="Icon" Property="Margin" Value="5,0,0,0"/>
                         </DataTrigger>
-                        <DataTrigger Binding="{Binding deviceinfo.StressDeviceType}" Value="1">
+                        <DataTrigger Binding="{Binding Deviceinfo.StressDeviceType}" Value="1">
                             <Setter TargetName="Type" Property="Text" Value="Тредмил"/>
                             <Setter TargetName="Type" Property="FontWeight" Value="Bold"/>
                             <Setter TargetName="Icon" Property="Icon" Value="Solid_Running"/>

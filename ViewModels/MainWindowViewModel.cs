@@ -9,32 +9,36 @@ using System.Windows.Input;
 using System.Collections.ObjectModel;
 using MVVM_XML_RS.Models.Devinfo;
 using System.Linq;
+using System.Windows.Controls;
 using Cinch;
 
 namespace MVVM_XML_RS.ViewModels
 {
     internal class MainWindowViewModel: ViewModel
     {
-        public SimpleCommand<object, EventToCommandArgs> MouseLeftButtonDown { get; private set; }
-
-        static private bool _conditionismouseonheader = false;
-        public bool Conditionismouseonheader
-        {
-            get => _conditionismouseonheader;
-            set => Set(ref _conditionismouseonheader, value);
-        }
-
-        private int _selectPageIndex;
-        public int SelectPageIndex
-        {
-            get => _selectPageIndex;
-            set => Set(ref _selectPageIndex, value);
-        }
+        //private VisualView _visualview;
+        //public VisualView visualview
+        //{
+        //    get => _visualview;
+        //    set => Set(ref _visualview, value);
+        //}
         private Doc _doc;
         public Doc doc
         {
             get => _doc;
             set => Set(ref _doc, value);
+        }
+        private ObservableCollection<DeviceView> _DeviceViews = new ObservableCollection<DeviceView>();
+        public ObservableCollection<DeviceView> DeviceViews
+        {
+            get => _DeviceViews;
+            set => Set(ref _DeviceViews, value);
+        }
+        private DeviceView _SelectedDevice;
+        public DeviceView SelectedDevice
+        {
+            get => _SelectedDevice;
+            set => Set(ref _SelectedDevice, value);
         }
         private string _windowTitle = "Reabilitation Param Changer";
         public string WindowTitle
@@ -60,17 +64,20 @@ namespace MVVM_XML_RS.ViewModels
             get => _progress;
             set => Set(ref _progress, value);
         }
-        private ObservableCollection<DeviceView> _DeviceViews = new ObservableCollection<DeviceView>();
-        public ObservableCollection<DeviceView> DeviceViews {
-            get => _DeviceViews;
-            set => Set(ref _DeviceViews, value);
-        }
-        private DeviceView _SelectedDevice;
-        public DeviceView SelectedDevice
+        
+        private int _selectPageIndex;
+        public int SelectPageIndex
         {
-            get => _SelectedDevice;
-            set => Set(ref _SelectedDevice, value);
+            get => _selectPageIndex;
+            set => Set(ref _selectPageIndex, value);
         }
+        static private bool _conditionismouseonheader = false;
+        public bool Conditionismouseonheader
+        {
+            get => _conditionismouseonheader;
+            set => Set(ref _conditionismouseonheader, value);
+        }
+        public SimpleCommand<object, EventToCommandArgs> MouseLeftButtonDown { get; private set; }
         public ICommand OpenfileCommand { get; }
         private bool CanOpenfileCommandExecuted(object p) => true;
         private void OnOpenfileCommandExecuted(object p)
@@ -86,18 +93,8 @@ namespace MVVM_XML_RS.ViewModels
                 for(int i = 0; i < _doc.Devices.Count; i++)
                 {
                     DeviceView deviceView = new DeviceView();
-                    deviceView.deviceinfo = _doc.Devices[i].deviceinfo;
-                    deviceView.DeviceName = _doc.Devices[i].Name;
-                    List<ViewList> viewList = new List<ViewList>();
-
-                    for (int j = 0; j < 29; j++)
-                        viewList.Add(new ViewList()
-                        {
-                            SettingInfo = _doc.Devices[i].DeviceName[j],
-                            SettingValue = _doc.Devices[i].DeviceInfo[j],
-                            SettingButton = "Изменить",
-                        });
-                    deviceView.ViewLists = viewList;
+                    deviceView.Deviceinfo = _doc.Devices[i].Deviceinfo;
+                    deviceView.DeviceName = _doc.Devices[i].DeviceName;
                     _DeviceViews.Add(deviceView);
                 }
             }
@@ -114,14 +111,13 @@ namespace MVVM_XML_RS.ViewModels
         {
             SelectPageIndex = 1;
         }
-
-        public ICommand IsmouseonheaderCommand { get; }
-        private bool CanIsmouseonheaderCommand(object p) => true;
-        private void OnIsmouseonheaderCommand(object p)
-        {
-            _conditionismouseonheader = true;
-        }
-
+        //public ICommand IsmouseonheaderCommand { get; }
+        //private bool CanIsmouseonheaderCommand(object p) => true;
+        //private void OnIsmouseonheaderCommand(object p)
+        //{
+        //    _conditionismouseonheader = true;
+        //}
+        
         public MainWindowViewModel()
         {
             #region Команды
@@ -129,7 +125,7 @@ namespace MVVM_XML_RS.ViewModels
             CloseApplicationCommand = new LambdaCommand(OnCloseApplicationCommandExecuted, CanCloseApplicationCommandExecuted);
             OpenfileCommand = new LambdaCommand(OnOpenfileCommandExecuted, CanOpenfileCommandExecuted);
             ChangeIndexCommand = new LambdaCommand(OnChangeIndexCommand, CanChangeIndexCommand);
-            IsmouseonheaderCommand = new LambdaCommand(OnIsmouseonheaderCommand, CanIsmouseonheaderCommand);
+            //IsmouseonheaderCommand = new LambdaCommand(OnIsmouseonheaderCommand, CanIsmouseonheaderCommand);
             // MoveHeadApplicationCommand = new LambdaCommand(OnMoveHeadApplicationCommandExecuted, CanMoveHeadApplicationCommandExecuted);
             #endregion
             DeviceView deviceView1 = new DeviceView();
@@ -137,24 +133,21 @@ namespace MVVM_XML_RS.ViewModels
             Deviceinfo deviceinfo1 = new Deviceinfo();
             deviceinfo1.BTDeviceName = "154856235";
             deviceinfo1.StressDeviceType = "1";
-            deviceView1.deviceinfo = deviceinfo1;
+            deviceView1.Deviceinfo = deviceinfo1;
             _DeviceViews.Add(deviceView1);
             DeviceView deviceView2 = new DeviceView();
             deviceView2.DeviceName = "efjtsef";
             Deviceinfo deviceinfo2 = new Deviceinfo();
             deviceinfo2.BTDeviceName = "15675235";
             deviceinfo2.StressDeviceType = "0";
-            deviceView2.deviceinfo = deviceinfo2;
+            deviceView2.Deviceinfo = deviceinfo2;
             _DeviceViews.Add(deviceView2);
         }
 
         private static void OnMouseLeftButtonDown(EventToCommandArgs e)
         {
-            if (_conditionismouseonheader == true)
-            {
-                ((Window) e.Sender).DragMove();
-                _conditionismouseonheader = false;
-            }
+            var dp= e.Sender as DockPanel;
+            ((Window)dp.Parent.TryFindParent<Window>()).DragMove();
         }
 
     }

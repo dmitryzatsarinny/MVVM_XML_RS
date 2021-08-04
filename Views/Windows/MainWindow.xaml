@@ -9,6 +9,7 @@
         xmlns:fa="http://schemas.fontawesome.com/icons/"
         xmlns:cinchV2="clr-namespace:Cinch;assembly=Cinch.WPF"
         xmlns:Devinfo="clr-namespace:MVVM_XML_RS.Models.Devinfo"
+        xmlns:col="clr-namespace:System.Collections;assembly=mscorlib"
         
         WindowStyle="None"
         WindowStartupLocation="CenterScreen"
@@ -16,11 +17,7 @@
         Height="800" 
         Width="800">
 
-    <i:Interaction.Triggers>
-        <i:EventTrigger EventName="MouseLeftButtonDown">
-                    <cinchV2:EventToCommandTrigger Command="{Binding MouseLeftButtonDown}" />
-        </i:EventTrigger>
-    </i:Interaction.Triggers>
+   
 
     <Window.DataContext>
         <vm:MainWindowViewModel/>
@@ -41,7 +38,7 @@
             <DockPanel DockPanel.Dock="Top" Height="30" Background="#FFA6CDF0">
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="MouseLeftButtonDown">
-                        <i:InvokeCommandAction Command="{Binding IsmouseonheaderCommand}"/>
+                        <cinchV2:EventToCommandTrigger Command="{Binding MouseLeftButtonDown}" />
                     </i:EventTrigger>
                 </i:Interaction.Triggers>
                 <StackPanel Orientation="Horizontal">
@@ -124,7 +121,20 @@
                         <GroupBox.Header>
                             <TextBlock Text="{Binding SelectedDevice.DeviceName, StringFormat=Устройство : {0}, TargetNullValue='Устройство не выбрано'}" Style="{StaticResource HeaderStyle}"/>
                         </GroupBox.Header>
-                        <DataGrid ItemsSource="{Binding SelectedDevice.ViewLists}" CanUserSortColumns="False" AutoGenerateColumns="False" 
+                        <!--<ListView Name="SelectDevice" ItemsSource="{DynamicResource ResourceKey=visualview}">
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=Characteristic}" Header="Характеристика" Width="200"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=Parameter}" Header="Значение параметра" Width="200"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=ChangeButton}" Header="Цена" Width="200"/>
+                                </GridView>
+                            </ListView.View>
+                            <ListView.Resources>
+                                <col:ArrayList x:Key="visualview">
+                                </col:ArrayList>
+                            </ListView.Resources>
+                        </ListView>-->
+                        <!--<DataGrid ItemsSource="{Binding SelectedDevice.ViewLists}" CanUserSortColumns="False" AutoGenerateColumns="False" 
                                   IsReadOnly="True"
                                   CanUserAddRows="False"
                                   CanUserDeleteRows="False"
@@ -194,7 +204,7 @@
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
                             </DataGrid.Columns>
-                        </DataGrid>
+                        </DataGrid>-->
                     </GroupBox>
                 </TabItem>
             </TabControl>
