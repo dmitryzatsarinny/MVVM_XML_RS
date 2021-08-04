@@ -10,6 +10,6 @@
         </Style.Resources>
     </Style>
 
-    <DropShadowEffect x:Key="ShadowDepth"/>
+    <DropShadowEffect x:Key="ShadowDepth" RenderingBias="Performance"/>
 
 </ResourceDictionary>

@@ -44,7 +44,9 @@
                         <i:InvokeCommandAction Command="{Binding IsmouseonheaderCommand}"/>
                     </i:EventTrigger>
                 </i:Interaction.Triggers>
-                <TextBlock Margin="10,0,0,0"  Text="{Binding WindowTitle}" FontSize="18" VerticalAlignment="Center"/>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Margin="10,0,0,0"  Text="{Binding WindowTitle}" FontSize="18" VerticalAlignment="Center"/>
+                </StackPanel>
                 <Button Command="{StaticResource CloseApplicationCommand}"  Margin="0,0,1,0" FontSize="20" Content="x" Height="28" Width="28" VerticalAlignment="Center" HorizontalContentAlignment="Center" HorizontalAlignment="Right" FontWeight="Bold" Background="#FFEC5454" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Padding="0,-7,0,0" UseLayoutRounding="False"/>
             </DockPanel>
 
@@ -60,8 +62,8 @@
                 <MenuItem FontSize="16" Command ="{Binding OpenfileCommand}">
                     <MenuItem.Header>
                         <StackPanel Orientation="Horizontal">
-                            <fa:FontAwesome Icon="Regular_File" Height="17"/>
-                            <TextBlock Text=" Файл"/>
+                            <fa:FontAwesome Icon="Regular_File" Margin="0,1,5,0" FontSize="18"/>
+                            <TextBlock Text="Файл" />
                         </StackPanel>
                     </MenuItem.Header>
                 </MenuItem>
@@ -69,8 +71,8 @@
                 <MenuItem FontSize="16">
                     <MenuItem.Header>
                         <StackPanel Orientation="Horizontal">
-                            <fa:FontAwesome Icon="Solid_Book" Height="17"/>
-                            <TextBlock Text=" Помощь"/>
+                            <fa:FontAwesome Icon="Solid_Book" Margin="0,1,5,0" FontSize="18"/>
+                            <TextBlock Text="Помощь"/>
                         </StackPanel>
                     </MenuItem.Header>
                 </MenuItem>
@@ -78,8 +80,8 @@
                 <MenuItem FontSize="16" HorizontalAlignment="Right">
                     <MenuItem.Header>
                         <StackPanel Orientation="Horizontal">
-                            <fa:FontAwesome Icon="Solid_download" Height="17"/>
-                            <TextBlock Text=" Сохранить"/>
+                            <fa:FontAwesome Icon="Solid_download" Margin="0,1,5,0" FontSize="18"/>
+                            <TextBlock Text="Сохранить"/>
                         </StackPanel>
                     </MenuItem.Header>
                 </MenuItem>

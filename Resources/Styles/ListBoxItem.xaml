@@ -1,7 +1,7 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
-                    xmlns:Devinfo="clr-namespace:MVVM_XML_RS.Models.Devinfo">
+                    xmlns:Devinfo="clr-namespace:MVVM_XML_RS.Models.Devinfo" xmlns:fa="http://schemas.fontawesome.com/icons/">
 
     <Style x:Key="ListBoxItemDevice" TargetType="{x:Type ListBoxItem}">
         <Style.Resources>
@@ -22,39 +22,48 @@
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="10"/>
-                                <ColumnDefinition Width="250"/>
+                                <ColumnDefinition Width="220"/>
                                 <ColumnDefinition Width="10"/>
                                 <ColumnDefinition Width="300"/>
                                 <ColumnDefinition Width="10"/>
-                                <ColumnDefinition Width="190"/>
+                                <ColumnDefinition Width="200"/>
                             </Grid.ColumnDefinitions>
                             <Control x:Name="Proxy" BorderBrush="Gainsboro" />
                             <Border Grid.Column="1" Style="{DynamicResource BorderDevice}" BorderBrush="{Binding Path=BorderBrush, ElementName=Proxy}">
                                 <StackPanel Orientation="Horizontal">
                                     <TextBlock Text="Устройство: " />
-                                    <TextBlock Text="{Binding DeviceName}"/>
+                                    <TextBlock Text="{Binding DeviceName}" FontWeight="Bold"/>
                                 </StackPanel>
                             </Border>
                             <Border Grid.Column="3" Style="{DynamicResource BorderDevice}" BorderBrush="{Binding Path=BorderBrush, ElementName=Proxy}">
                                 <StackPanel Orientation="Horizontal">
                                     <TextBlock Text="Имя кардиографа: " />
-                                    <TextBlock Text="{Binding deviceinfo.BTDeviceName}"/>
+                                    <TextBlock Text="{Binding deviceinfo.BTDeviceName}" FontWeight="Bold"/>
                                 </StackPanel>
                             </Border>
                             <Border Grid.Column="5" Style="{DynamicResource BorderDevice}" BorderBrush="{Binding Path=BorderBrush, ElementName=Proxy}">
                                 <StackPanel Orientation="Horizontal">
                                     <TextBlock Text="Тип: " />
                                     <TextBlock Name="Type" Text="{Binding deviceinfo.StressDeviceType}"/>
+                                    <fa:FontAwesome x:Name="Icon" Foreground="Black"/>
                                 </StackPanel>
                             </Border>
                         </Grid>
                     </Border>
                     <ControlTemplate.Triggers>
                         <DataTrigger Binding="{Binding deviceinfo.StressDeviceType}" Value="0">
-                            <Setter TargetName="Type" Property="Text" Value="Велосипед"/>
+                            <Setter TargetName="Type" Property="Text" Value="Велоэргометр"/>
+                            <Setter TargetName="Type" Property="FontWeight" Value="Bold"/>
+                            <Setter TargetName="Icon" Property="Icon" Value="Solid_Biking"/>
+                            <Setter TargetName="Icon" Property="FontSize" Value="18"/>
+                            <Setter TargetName="Icon" Property="Margin" Value="5,0,0,0"/>
                         </DataTrigger>
                         <DataTrigger Binding="{Binding deviceinfo.StressDeviceType}" Value="1">
                             <Setter TargetName="Type" Property="Text" Value="Тредмил"/>
+                            <Setter TargetName="Type" Property="FontWeight" Value="Bold"/>
+                            <Setter TargetName="Icon" Property="Icon" Value="Solid_Running"/>
+                            <Setter TargetName="Icon" Property="FontSize" Value="18"/>
+                            <Setter TargetName="Icon" Property="Margin" Value="5,0,0,0"/>
                         </DataTrigger>
                         <Trigger Property="IsMouseOver" Value="true">
                             <Setter TargetName="Proxy" Property="BorderBrush" Value="YellowGreen" />
