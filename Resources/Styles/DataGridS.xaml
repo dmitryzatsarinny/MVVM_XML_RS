@@ -1,5 +1,7 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:vm="clr-namespace:MVVM_XML_RS.ViewModels">
+
     <Style x:Key="DataGridStyle" TargetType="DataGridCell">
         <Setter Property="BorderBrush" Value="{Binding MyProperty}" />
         <Style.Triggers>
@@ -29,9 +31,9 @@
                                     <ColumnDefinition Width="17"/>
                                 </Grid.ColumnDefinitions>
                                 <Border Grid.Column="0" Grid.ColumnSpan="4" Background="LightGray"></Border>
-                                <TextBlock Grid.Column="0" FontSize="16" Text="Характеристика" Style="{DynamicResource TextBlockHeaderGridStyle}"/>
-                                <TextBlock Grid.Column="1" FontSize="16" Text="Параметр характеристики" Style="{DynamicResource TextBlockHeaderGridStyle}"/>
-                                <TextBlock Grid.Column="2" FontSize="16" Text="Изменение параметра" Style="{DynamicResource TextBlockHeaderGridStyle}"/>
+                                <TextBlock Grid.Column="0" Text="Характеристика" Style="{DynamicResource TextBlockHeaderGridStyle}"/>
+                                <TextBlock Grid.Column="1" Text="Параметр характеристики" Style="{DynamicResource TextBlockHeaderGridStyle}"/>
+                                <TextBlock Grid.Column="2" Text="Изменение параметра" Style="{DynamicResource TextBlockHeaderGridStyle}"/>
                                 <Rectangle Grid.Column="0" Stroke="Black" Grid.ColumnSpan="3"/>
                                 <Rectangle Grid.Column="1" Stroke="Black"/>
                             </Grid>
@@ -73,42 +75,147 @@
                                             <RowDefinition/>
                                             <RowDefinition/>
                                         </Grid.RowDefinitions>
-                                    
-                                    <Rectangle Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3" Fill="LightYellow" />
-                                    <Rectangle Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="3" Fill="LightBlue" />
-                                    <Rectangle Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="3" Fill="LightYellow" />
-                                    <Rectangle Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="3" Fill="LightBlue" />
-                                    <Rectangle Grid.Column="0" Grid.Row="4" Grid.ColumnSpan="3" Fill="LightYellow" />
-                                    <Rectangle Grid.Column="0" Grid.Row="5" Grid.ColumnSpan="3" Fill="LightBlue" />
-                                    <Rectangle Grid.Column="0" Grid.Row="6" Grid.ColumnSpan="3" Fill="LightYellow" />
-                                    <Rectangle Grid.Column="0" Grid.Row="7" Grid.ColumnSpan="3" Fill="LightBlue" />
-                                    <Rectangle Grid.Column="0" Grid.Row="8" Grid.ColumnSpan="3" Fill="LightYellow" />
-                                    <Rectangle Grid.Column="0" Grid.Row="9" Grid.ColumnSpan="3" Fill="LightBlue" />
-                                    <Rectangle Grid.Column="0" Grid.Row="10" Grid.ColumnSpan="3" Fill="LightYellow" />
-                                    <Rectangle Grid.Column="0" Grid.Row="11" Grid.ColumnSpan="3" Fill="LightBlue" />
-                                    <Rectangle Grid.Column="0" Grid.Row="12" Grid.ColumnSpan="3" Fill="LightYellow" />
-                                    <Rectangle Grid.Column="0" Grid.Row="13" Grid.ColumnSpan="3" Fill="LightBlue" />
-                                    <Rectangle Grid.Column="0" Grid.Row="14" Grid.ColumnSpan="3" Fill="LightYellow" />
-                                    <Rectangle Grid.Column="0" Grid.Row="15" Grid.ColumnSpan="3" Fill="LightBlue" />
-                                    <Rectangle Grid.Column="0" Grid.Row="16" Grid.ColumnSpan="3" Fill="LightYellow" />
-                                    <Rectangle Grid.Column="0" Grid.Row="17" Grid.ColumnSpan="3" Fill="LightBlue" />
-                                    <Rectangle Grid.Column="0" Grid.Row="18" Grid.ColumnSpan="3" Fill="LightYellow" />
-                                    <Rectangle Grid.Column="0" Grid.Row="19" Grid.ColumnSpan="3" Fill="LightBlue" />
-                                    <Rectangle Grid.Column="0" Grid.Row="20" Grid.ColumnSpan="3" Fill="LightYellow" />
-                                    <Rectangle Grid.Column="0" Grid.Row="21" Grid.ColumnSpan="3" Fill="LightBlue" />
-                                    <Rectangle Grid.Column="0" Grid.Row="22" Grid.ColumnSpan="3" Fill="LightYellow" />
-                                    <Rectangle Grid.Column="0" Grid.Row="23" Grid.ColumnSpan="3" Fill="LightBlue" />
-                                    <Rectangle Grid.Column="0" Grid.Row="24" Grid.ColumnSpan="3" Fill="LightYellow" />
-                                    <Rectangle Grid.Column="0" Grid.Row="25" Grid.ColumnSpan="3" Fill="LightBlue" />
-                                    <Rectangle Grid.Column="0" Grid.Row="26" Grid.ColumnSpan="3" Fill="LightYellow" />
-                                    <Rectangle Grid.Column="0" Grid.Row="27" Grid.ColumnSpan="3" Fill="LightBlue" />
-                                    <Rectangle Grid.Column="0" Grid.Row="28" Grid.ColumnSpan="3" Fill="LightYellow" />
+
+                                    <Rectangle Grid.Row="0" Style="{DynamicResource RectangleStyle1}"/>
+                                    <Rectangle Grid.Row="1" Style="{DynamicResource RectangleStyle2}"/>
+                                    <Rectangle Grid.Row="2" Style="{DynamicResource RectangleStyle1}"/>
+                                    <Rectangle Grid.Row="3" Style="{DynamicResource RectangleStyle2}"/>
+                                    <Rectangle Grid.Row="4" Style="{DynamicResource RectangleStyle1}"/>
+                                    <Rectangle Grid.Row="5" Style="{DynamicResource RectangleStyle2}"/>
+                                    <Rectangle Grid.Row="6" Style="{DynamicResource RectangleStyle1}"/>
+                                    <Rectangle Grid.Row="7" Style="{DynamicResource RectangleStyle2}"/>
+                                    <Rectangle Grid.Row="8" Style="{DynamicResource RectangleStyle1}"/>
+                                    <Rectangle Grid.Row="9" Style="{DynamicResource RectangleStyle2}"/>
+                                    <Rectangle Grid.Row="10" Style="{DynamicResource RectangleStyle1}"/>
+                                    <Rectangle Grid.Row="11" Style="{DynamicResource RectangleStyle2}"/>
+                                    <Rectangle Grid.Row="12" Style="{DynamicResource RectangleStyle1}"/>
+                                    <Rectangle Grid.Row="13" Style="{DynamicResource RectangleStyle2}"/>
+                                    <Rectangle Grid.Row="14" Style="{DynamicResource RectangleStyle1}"/>
+                                    <Rectangle Grid.Row="15" Style="{DynamicResource RectangleStyle2}"/>
+                                    <Rectangle Grid.Row="16" Style="{DynamicResource RectangleStyle1}"/>
+                                    <Rectangle Grid.Row="17" Style="{DynamicResource RectangleStyle2}"/>
+                                    <Rectangle Grid.Row="18" Style="{DynamicResource RectangleStyle1}"/>
+                                    <Rectangle Grid.Row="19" Style="{DynamicResource RectangleStyle2}"/>
+                                    <Rectangle Grid.Row="20" Style="{DynamicResource RectangleStyle1}"/>
+                                    <Rectangle Grid.Row="21" Style="{DynamicResource RectangleStyle2}"/>
+                                    <Rectangle Grid.Row="22" Style="{DynamicResource RectangleStyle1}"/>
+                                    <Rectangle Grid.Row="23" Style="{DynamicResource RectangleStyle2}"/>
+                                    <Rectangle Grid.Row="24" Style="{DynamicResource RectangleStyle1}"/>
+                                    <Rectangle Grid.Row="25" Style="{DynamicResource RectangleStyle2}"/>
+                                    <Rectangle Grid.Row="26" Style="{DynamicResource RectangleStyle1}"/>
+                                    <Rectangle Grid.Row="27" Style="{DynamicResource RectangleStyle2}"/>
+                                    <Rectangle Grid.Row="28" Style="{DynamicResource RectangleStyle1}"/>
                                     <Rectangle Grid.Row="0" Grid.Column="0" Grid.RowSpan="29" Stroke="Black" Grid.ColumnSpan="3"/>
                                     <Rectangle Grid.Row="0" Grid.Column="1" Grid.RowSpan="29" Stroke="Black"/>
+
+                                    <TextBlock Grid.Row="0" Text="StressDeviceType" Style="{DynamicResource TextBlockGridStyle}"/>
+                                    <TextBlock Grid.Row="1" Text="StressDeviceVeloType" Style="{DynamicResource TextBlockGridStyle}"/>
+                                    <TextBlock Grid.Row="2" Text="StressDeviceTrmType" Style="{DynamicResource TextBlockGridStyle}"/>
+                                    <TextBlock Grid.Row="3" Text="StressDevicePort" Style="{DynamicResource TextBlockGridStyle}"/>
+                                    <TextBlock Grid.Row="4" Text="ECG_Port" Style="{DynamicResource TextBlockGridStyle}"/>
+                                    <TextBlock Grid.Row="5" Text="ECG_WIRELESS_Port" Style="{DynamicResource TextBlockGridStyle}"/>
+                                    <TextBlock Grid.Row="6" Text="StressTestProgramm" Style="{DynamicResource TextBlockGridStyle}"/>
+                                    <TextBlock Grid.Row="7" Text="BTDeviceName" Style="{DynamicResource TextBlockGridStyle}"/>
+                                    <TextBlock Grid.Row="8" Text="Wireless" Style="{DynamicResource TextBlockGridStyle}"/>
+                                    <TextBlock Grid.Row="9" Text="VeloStartPower" Style="{DynamicResource TextBlockGridStyle}"/>
+                                    <TextBlock Grid.Row="10" Text="TrmStartPowerS" Style="{DynamicResource TextBlockGridStyle}"/>
+                                    <TextBlock Grid.Row="11" Text="TrmStartPowerV" Style="{DynamicResource TextBlockGridStyle}"/>
+                                    <TextBlock Grid.Row="12" Text="IncPower" Style="{DynamicResource TextBlockGridStyle}"/>
+                                    <TextBlock Grid.Row="13" Text="VeloMaxPower" Style="{DynamicResource TextBlockGridStyle}"/>
+                                    <TextBlock Grid.Row="14" Text="TrmMaxPowerS" Style="{DynamicResource TextBlockGridStyle}"/>
+                                    <TextBlock Grid.Row="15" Text="TrmMaxPowerV" Style="{DynamicResource TextBlockGridStyle}"/>
+                                    <TextBlock Grid.Row="16" Text="TotalTrainingLenth" Style="{DynamicResource TextBlockGridStyle}"/>
+                                    <TextBlock Grid.Row="17" Text="MinPowerTrainingLenth" Style="{DynamicResource TextBlockGridStyle}"/>
+                                    <TextBlock Grid.Row="18" Text="MaxPowerTrainingLenth" Style="{DynamicResource TextBlockGridStyle}"/>
+                                    <TextBlock Grid.Row="19" Text="TrainingHR" Style="{DynamicResource TextBlockGridStyle}"/>
+                                    <TextBlock Grid.Row="20" Text="TrainingLDdec" Style="{DynamicResource TextBlockGridStyle}"/>
+                                    <TextBlock Grid.Row="21" Text="Trendchan" Style="{DynamicResource TextBlockGridStyle}"/>
+                                    <TextBlock Grid.Row="22" Text="P_RESETTIME" Style="{DynamicResource TextBlockGridStyle}"/>
+                                    <TextBlock Grid.Row="23" Text="IncTime" Style="{DynamicResource TextBlockGridStyle}"/>
+                                    <TextBlock Grid.Row="24" Text="IncTimeMode" Style="{DynamicResource TextBlockGridStyle}"/>
+                                    <TextBlock Grid.Row="25" Text="VeloStopPower" Style="{DynamicResource TextBlockGridStyle}"/>
+                                    <TextBlock Grid.Row="26" Text="TrmStopPowerS" Style="{DynamicResource TextBlockGridStyle}"/>
+                                    <TextBlock Grid.Row="27" Text="TrmStopPowerV" Style="{DynamicResource TextBlockGridStyle}"/>
+                                    <TextBlock Grid.Row="28" Text="UserProtName" Style="{DynamicResource TextBlockGridStyle}"/>
+
+                                    <TextBlock Grid.Row="0" Name="StressDeviceType" Text="{Binding SelectedDevice.Deviceinfo.StressDeviceType}" Style="{DynamicResource TextBlockGridStyleParam}"/>
+                                    <TextBlock Grid.Row="1" Name="StressDeviceVeloType" Text="{Binding SelectedDevice.Deviceinfo.StressDeviceVeloType}" Style="{DynamicResource TextBlockGridStyleParam}"/>
+                                    <TextBlock Grid.Row="2" Name="StressDeviceTrmType" Text="{Binding SelectedDevice.Deviceinfo.StressDeviceTrmType}" Style="{DynamicResource TextBlockGridStyleParam}"/>
+                                    <TextBlock Grid.Row="3" Name="StressDevicePort" Text="{Binding SelectedDevice.Deviceinfo.StressDevicePort}" Style="{DynamicResource TextBlockGridStyleParam}"/>
+                                    <TextBlock Grid.Row="4" Name="ECG_Port" Text="{Binding SelectedDevice.Deviceinfo.ECG_Port}" Style="{DynamicResource TextBlockGridStyleParam}"/>
+                                    <TextBlock Grid.Row="5" Name="ECG_WIRELESS_Port" Text="{Binding SelectedDevice.Deviceinfo.ECG_WIRELESS_Port}" Style="{DynamicResource TextBlockGridStyleParam}"/>
+                                    <TextBlock Grid.Row="6" Name="StressTestProgramm" Text="{Binding SelectedDevice.Deviceinfo.StressTestProgramm}" Style="{DynamicResource TextBlockGridStyleParam}"/>
+                                    <TextBlock Grid.Row="7" Name="BTDeviceName" Text="{Binding SelectedDevice.Deviceinfo.BTDeviceName}" Style="{DynamicResource TextBlockGridStyleParam}"/>
+                                    <TextBlock Grid.Row="8" Name="Wireless" Text="{Binding SelectedDevice.Deviceinfo.Wireless}" Style="{DynamicResource TextBlockGridStyleParam}"/>
+                                    <TextBlock Grid.Row="9" Name="VeloStartPower" Text="{Binding SelectedDevice.Deviceinfo.VeloStartPower}" Style="{DynamicResource TextBlockGridStyleParam}"/>
+                                    <TextBlock Grid.Row="10" Name="TrmStartPowerS" Text="{Binding SelectedDevice.Deviceinfo.TrmStartPowerS}" Style="{DynamicResource TextBlockGridStyleParam}"/>
+                                    <TextBlock Grid.Row="11" Name="TrmStartPowerV" Text="{Binding SelectedDevice.Deviceinfo.TrmStartPowerV}" Style="{DynamicResource TextBlockGridStyleParam}"/>
+                                    <TextBlock Grid.Row="12" Name="IncPower" Text="{Binding SelectedDevice.Deviceinfo.IncPower}" Style="{DynamicResource TextBlockGridStyleParam}"/>
+                                    <TextBlock Grid.Row="13" Name="VeloMaxPower" Text="{Binding SelectedDevice.Deviceinfo.VeloMaxPower}" Style="{DynamicResource TextBlockGridStyleParam}"/>
+                                    <TextBlock Grid.Row="14" Name="TrmMaxPowerS" Text="{Binding SelectedDevice.Deviceinfo.TrmMaxPowerS}" Style="{DynamicResource TextBlockGridStyleParam}"/>
+                                    <TextBlock Grid.Row="15" Name="TrmMaxPowerV" Text="{Binding SelectedDevice.Deviceinfo.TrmMaxPowerV}" Style="{DynamicResource TextBlockGridStyleParam}"/>
+                                    <TextBlock Grid.Row="16" Name="TotalTrainingLenth" Text="{Binding SelectedDevice.Deviceinfo.TotalTrainingLenth}" Style="{DynamicResource TextBlockGridStyleParam}"/>
+                                    <TextBlock Grid.Row="17" Name="MinPowerTrainingLenth" Text="{Binding SelectedDevice.Deviceinfo.MinPowerTrainingLenth}" Style="{DynamicResource TextBlockGridStyleParam}"/>
+                                    <TextBlock Grid.Row="18" Name="MaxPowerTrainingLenth" Text="{Binding SelectedDevice.Deviceinfo.MaxPowerTrainingLenth}" Style="{DynamicResource TextBlockGridStyleParam}"/>
+                                    <TextBlock Grid.Row="19" Name="TrainingHR" Text="{Binding SelectedDevice.Deviceinfo.TrainingHR}" Style="{DynamicResource TextBlockGridStyleParam}"/>
+                                    <TextBlock Grid.Row="20" Name="TrainingLDdec" Text="{Binding SelectedDevice.Deviceinfo.TrainingLDdec}" Style="{DynamicResource TextBlockGridStyleParam}"/>
+                                    <TextBlock Grid.Row="21" Name="Trendchan" Text="{Binding SelectedDevice.Deviceinfo.Trendchan}" Style="{DynamicResource TextBlockGridStyleParam}"/>
+                                    <TextBlock Grid.Row="22" Name="P_RESETTIME" Text="{Binding SelectedDevice.Deviceinfo.P_RESETTIME}" Style="{DynamicResource TextBlockGridStyleParam}"/>
+                                    <TextBlock Grid.Row="23" Name="IncTime" Text="{Binding SelectedDevice.Deviceinfo.IncTime}" Style="{DynamicResource TextBlockGridStyleParam}"/>
+                                    <TextBlock Grid.Row="24" Name="IncTimeMode" Text="{Binding SelectedDevice.Deviceinfo.IncTimeMode}" Style="{DynamicResource TextBlockGridStyleParam}"/>
+                                    <TextBlock Grid.Row="25" Name="VeloStopPower" Text="{Binding SelectedDevice.Deviceinfo.VeloStopPower}" Style="{DynamicResource TextBlockGridStyleParam}"/>
+                                    <TextBlock Grid.Row="26" Name="TrmStopPowerS" Text="{Binding SelectedDevice.Deviceinfo.TrmStopPowerS}" Style="{DynamicResource TextBlockGridStyleParam}"/>
+                                    <TextBlock Grid.Row="27" Name="TrmStopPowerV" Text="{Binding SelectedDevice.Deviceinfo.TrmStopPowerV}" Style="{DynamicResource TextBlockGridStyleParam}"/>
+                                    <TextBlock Grid.Row="28" Name="UserProtName" Text="{Binding SelectedDevice.Deviceinfo.UserProtName}" Style="{DynamicResource TextBlockGridStyleParam}"/>
+
+                                    <Button Grid.Row="0" Style="{DynamicResource ButtonStyle}"/>
+                                    <Button Grid.Row="1" Style="{DynamicResource ButtonStyle}"/>
+                                    <Button Grid.Row="2" Style="{DynamicResource ButtonStyle}"/>
+                                    <Button Grid.Row="3" Style="{DynamicResource ButtonStyle}"/>
+                                    <Button Grid.Row="4" Style="{DynamicResource ButtonStyle}"/>
+                                    <Button Grid.Row="5" Style="{DynamicResource ButtonStyle}"/>
+                                    <Button Grid.Row="6" Style="{DynamicResource ButtonStyle}"/>
+                                    <Button Grid.Row="7" Style="{DynamicResource ButtonStyle}"/>
+                                    <Button Grid.Row="8" Style="{DynamicResource ButtonStyle}"/>
+                                    <Button Grid.Row="9" Style="{DynamicResource ButtonStyle}"/>
+                                    <Button Grid.Row="10" Style="{DynamicResource ButtonStyle}"/>
+                                    <Button Grid.Row="11" Style="{DynamicResource ButtonStyle}"/>
+                                    <Button Grid.Row="12" Style="{DynamicResource ButtonStyle}"/>
+                                    <Button Grid.Row="13" Style="{DynamicResource ButtonStyle}"/>
+                                    <Button Grid.Row="14" Style="{DynamicResource ButtonStyle}"/>
+                                    <Button Grid.Row="15" Style="{DynamicResource ButtonStyle}"/>
+                                    <Button Grid.Row="16" Style="{DynamicResource ButtonStyle}"/>
+                                    <Button Grid.Row="17" Style="{DynamicResource ButtonStyle}"/>
+                                    <Button Grid.Row="18" Style="{DynamicResource ButtonStyle}"/>
+                                    <Button Grid.Row="19" Style="{DynamicResource ButtonStyle}"/>
+                                    <Button Grid.Row="20" Style="{DynamicResource ButtonStyle}"/>
+                                    <Button Grid.Row="21" Style="{DynamicResource ButtonStyle}"/>
+                                    <Button Grid.Row="22" Style="{DynamicResource ButtonStyle}"/>
+                                    <Button Grid.Row="23" Style="{DynamicResource ButtonStyle}"/>
+                                    <Button Grid.Row="24" Style="{DynamicResource ButtonStyle}"/>
+                                    <Button Grid.Row="25" Style="{DynamicResource ButtonStyle}"/>
+                                    <Button Grid.Row="26" Style="{DynamicResource ButtonStyle}"/>
+                                    <Button Grid.Row="27" Style="{DynamicResource ButtonStyle}"/>
+                                    <Button Grid.Row="28" Style="{DynamicResource ButtonStyle}"/>
+
                                 </Grid>
                             </ScrollViewer>
                         </Grid>
                     </Border>
+                    <ControlTemplate.Triggers>
+                        <DataTrigger Binding="{Binding SelectedDevice.Deviceinfo.StressDeviceType}" Value="0">
+                            <Setter TargetName="StressDeviceType" Property="Text" Value="Велоэргометр"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding SelectedDevice.Deviceinfo.StressDeviceType}" Value="1">
+                            <Setter TargetName="StressDeviceType" Property="Text" Value="Тредмил"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding SelectedDevice.Deviceinfo.StressDeviceVeloType}" Value="0">
+                            <Setter TargetName="StressDeviceVeloType" Property="Text" Value="Ручной"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding SelectedDevice.Deviceinfo.StressDeviceTrmType}" Value="0">
+                            <Setter TargetName="StressDeviceTrmType" Property="Text" Value="Ручной"/>
+                        </DataTrigger>
+                    </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>

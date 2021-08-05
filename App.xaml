@@ -13,6 +13,7 @@
                 <ResourceDictionary Source="Resources/Styles/DataGridS.xaml"/>
                 <ResourceDictionary Source="Resources/Styles/Border.xaml"/>
                 <ResourceDictionary Source="Resources/Styles/ListBoxItem.xaml"/>
+                <ResourceDictionary Source="Resources/Styles/Rectangles.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>
