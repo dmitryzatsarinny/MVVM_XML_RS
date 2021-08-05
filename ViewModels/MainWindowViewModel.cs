@@ -46,7 +46,7 @@ namespace MVVM_XML_RS.ViewModels
             get => _windowTitle;
             set => Set(ref _windowTitle, value);
         }
-        private string _applicationVersion = "Version 1.4";
+        private string _applicationVersion = "Version 1.5";
         public string ApplicationVersion
         {
             get => _applicationVersion;

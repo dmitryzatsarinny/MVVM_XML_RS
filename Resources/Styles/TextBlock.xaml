@@ -5,4 +5,11 @@
         <Setter Property="TextTrimming" Value="None"/>
         <Setter Property="HorizontalAlignment" Value="Center"/>
     </Style>
+
+    <Style x:Key="TextBlockHeaderGridStyle" TargetType="{x:Type TextBlock}">
+        
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+    </Style>
 </ResourceDictionary>

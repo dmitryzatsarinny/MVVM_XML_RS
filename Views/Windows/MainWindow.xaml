@@ -121,6 +121,9 @@
                         <GroupBox.Header>
                             <TextBlock Text="{Binding SelectedDevice.DeviceName, StringFormat=Устройство : {0}, TargetNullValue='Устройство не выбрано'}" Style="{StaticResource HeaderStyle}"/>
                         </GroupBox.Header>
+                        <!--<ScrollViewer VerticalScrollBarVisibility="Visible"  HorizontalScrollBarVisibility="Auto">-->
+                        <DataGrid Style="{DynamicResource DataGridSelectDevice}"/>
+                        <!--</ScrollViewer>-->
                         <!--<ListView Name="SelectDevice" ItemsSource="{DynamicResource ResourceKey=visualview}">
                             <ListView.View>
                                 <GridView>

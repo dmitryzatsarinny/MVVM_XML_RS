@@ -6,4 +6,31 @@
         <Setter Property="BorderThickness" Value="4" />
         <Setter Property="CornerRadius" Value="5" />
     </Style>
+
+    <!--<Style x:Key="BorderDevice1" TargetType="{x:Type Border}">
+        <Setter Property="BorderBrush" Value="CadetBlue"/>
+        <Setter Property="BorderThickness" Value="4" />
+        <Setter Property="CornerRadius" Value="5" />
+
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Border}">
+                    <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="10"/>
+                                <ColumnDefinition Width="220"/>
+                                <ColumnDefinition Width="10"/>
+                                <ColumnDefinition Width="300"/>
+                                <ColumnDefinition Width="10"/>
+                                <ColumnDefinition Width="200"/>
+                            </Grid.ColumnDefinitions>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        
+                    </ControlTemplate.Triggers>
+
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>-->
 </ResourceDictionary>
