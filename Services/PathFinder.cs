@@ -7,17 +7,12 @@ namespace MVVM_XML_RS.Services
     {
         public static string PathFinder_Ex()
         {
-            string path = "";
-            Microsoft.Win32.OpenFileDialog openFileDlg = new Microsoft.Win32.OpenFileDialog();
+            Microsoft.Win32.OpenFileDialog openFileDlg = new ();
             openFileDlg.InitialDirectory = Directory.GetCurrentDirectory();
             openFileDlg.DefaultExt = ".xml";
             openFileDlg.Filter = "Документ (.xml)|*.xml";
-            bool? result = openFileDlg.ShowDialog();
-            if (result == true)
-            {
-                path = openFileDlg.FileName;
-            }
-            return path;
+            
+            return (openFileDlg.ShowDialog() is true) ? openFileDlg.FileName : string.Empty;
         }
     }
 }

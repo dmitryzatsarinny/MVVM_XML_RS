@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using System.Windows.Controls;
 
 namespace MVVM_XML_RS.Models.Devinfo
 {
-	internal class DeviceView
+    internal class DeviceView
     {
 		public string DeviceName { get; set; }
         public Deviceinfo Deviceinfo { get; set; }

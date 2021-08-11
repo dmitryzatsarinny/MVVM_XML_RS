@@ -4,33 +4,20 @@ using System.Runtime.CompilerServices;
 
 namespace MVVM_XML_RS.ViewModels.Base
 {
-    internal abstract class ViewModel : INotifyPropertyChanged, IDisposable
+    internal abstract class ViewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
     
-        protected virtual void OnPropertyChanged(string PropertyName)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(PropertyName));
-        }
+        protected virtual void OnPropertyChanged(string PropertyName) =>
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(PropertyName));        
 
         protected virtual bool Set<T>(ref T field, T value, [CallerMemberName] string PropertyName = null)
         {
             if (Equals(field, value)) return false;
+
             field = value;
             OnPropertyChanged(PropertyName);
             return true;
-        }
-
-        public void Dispose()
-        {
-            Dispose(true);
-        }
-
-        private bool _Disposed;
-        protected virtual void Dispose(bool Disposing)
-        {
-            if (!Disposing || _Disposed) return;
-            _Disposed = true;
         }
     }
 

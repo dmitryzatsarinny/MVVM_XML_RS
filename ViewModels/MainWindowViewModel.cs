@@ -1,14 +1,10 @@
 ﻿using MVVM_XML_RS.Infrastructure.Commands;
 using MVVM_XML_RS.ViewModels.Base;
 using MVVM_XML_RS.Services;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Windows;
 using System.Windows.Input;
 using System.Collections.ObjectModel;
 using MVVM_XML_RS.Models.Devinfo;
-using System.Linq;
 using System.Windows.Controls;
 using Cinch;
 
@@ -17,12 +13,12 @@ namespace MVVM_XML_RS.ViewModels
     internal class MainWindowViewModel: ViewModel
     {
         private Doc _doc;
-        public Doc doc
+        public Doc Doc
         {
             get => _doc;
             set => Set(ref _doc, value);
         }
-        private ObservableCollection<DeviceView> _deviceViews = new ObservableCollection<DeviceView>();
+        private ObservableCollection<DeviceView> _deviceViews = new ();
         public ObservableCollection<DeviceView> DeviceViews
         {
             get => _deviceViews;
@@ -78,33 +74,30 @@ namespace MVVM_XML_RS.ViewModels
         {
             _status = "in progress";
             _progress = 0;
-            string str = PathFinder.PathFinder_Ex();
-            doc = XML_reader.find_xml_device(str);
+            
+            Doc = XmlReader.FindXmlDevice(PathFinder.PathFinder_Ex());
 
             _deviceViews.Clear();
+
             if (_doc != null)
             {
-                for(int i = 0; i < _doc.Devices.Count; i++)
+                foreach (DeviceView device in _doc.Devices)
                 {
-                    DeviceView deviceView = new DeviceView();
-                    deviceView.Deviceinfo = _doc.Devices[i].Deviceinfo;
-                    deviceView.DeviceName = _doc.Devices[i].DeviceName;
-                    _deviceViews.Add(deviceView);
+                    _deviceViews.Add(new DeviceView
+                    {
+                        Deviceinfo = device.Deviceinfo,
+                        DeviceName = device.DeviceName
+                    });
                 }
             }
         }
         public ICommand CloseApplicationCommand { get; }
         private bool CanCloseApplicationCommandExecuted(object p) => true;
-        private void OnCloseApplicationCommandExecuted(object p)
-        {
-            Application.Current.Shutdown();
-        }
+        private void OnCloseApplicationCommandExecuted(object p) => Application.Current.Shutdown();
+        
         public ICommand ChangeIndexCommand { get; }
         private bool CanChangeIndexCommand(object p) => true;
-        private void OnChangeIndexCommand(object p)
-        {
-            SelectPageIndex = 1;
-        }
+        private void OnChangeIndexCommand(object p) =>  SelectPageIndex = 1;        
         
         public MainWindowViewModel()
         {
@@ -137,6 +130,5 @@ namespace MVVM_XML_RS.ViewModels
             var dp= e.Sender as DockPanel;
             ((Window)dp.Parent.TryFindParent<Window>()).DragMove();
         }
-
     }
 }

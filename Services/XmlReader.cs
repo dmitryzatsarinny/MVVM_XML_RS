@@ -9,9 +9,9 @@ using System.Xml;
 
 namespace MVVM_XML_RS.Services
 {
-    internal class XML_reader
+    internal class XmlReader
     {
-        public static Doc find_xml_device(string str)
+        public static Doc FindXmlDevice(string str)
         {
 
             Doc doc = new Doc();
@@ -101,15 +101,13 @@ namespace MVVM_XML_RS.Services
                         }
                 }
             }
-            catch (System.FormatException e)
+            catch (FormatException e)
             {
-                string mess = e.Message;
-                MessageBox.Show(mess,  "Device " + (i-1) + " Exception", MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show(e.Message,  $"Device {i - 1} Exception", MessageBoxButton.OK, MessageBoxImage.Information);
             }
-            catch (System.ArgumentException e)
+            catch (ArgumentException e)
             {
-                string mess = e.Message;
-                MessageBox.Show(mess, "Файл не найден", MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show(e.Message, "Файл не найден", MessageBoxButton.OK, MessageBoxImage.Information);
             }
             doc.Devices = Devicelist;
             return doc;
